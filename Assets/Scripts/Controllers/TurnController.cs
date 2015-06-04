@@ -46,10 +46,14 @@ public class TurnController : MonoBehaviour {
         //THIS IS THE METHOD FOR LOCAL 2 PLAYER - Move it accordingly and change it for later methods(ai, online etc.)
         if (currentTurn == 1)
         {
+            Debug.Log("Hiding p1 changes");
             //hide future plans form player 2
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("BuildSite"))
             {
-                go.GetComponent<BuildSiteObj>().buildSite.hide();
+                if (!go.GetComponent<BuildSiteObj>().buildSite.buildTurn)
+                {
+                    go.GetComponent<BuildSiteObj>().buildSite.hide();
+                }
             }
 
             currentTurn = 2;
@@ -58,14 +62,27 @@ public class TurnController : MonoBehaviour {
         {
             //TODO: ENABLE ATTACK MODE
 
+            Debug.Log("Showing buildings");
             //Build buildings
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("BuildSite"))
             {
-                go.GetComponent<BuildSiteObj>().buildSite.build();
+                go.GetComponent<BuildSiteObj>().buildSite.show();
             }
+
+            Debug.Log("Advancing buildings");
+            //Advance BuildSites
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("BuildSite"))
+            {
+                go.GetComponent<BuildSiteObj>().buildSite.Advance();
+            }
+
+            //TODO: Commence attack button
+
             currentTurn = 1;
 
         }
+
+        
 
         updateText();
     }

@@ -4,6 +4,7 @@ using System.Collections;
 public class BuildSite : Building {
 
     public Building toBuild;
+    public bool buildTurn = false;
 
     public BuildSite(Tile tile) : base(1, tile)
     {
@@ -23,6 +24,20 @@ public class BuildSite : Building {
         toBuild = building;
     }
 
+    public void Advance()
+    {
+        if(!buildTurn)
+        {
+            buildTurn = true;
+        }
+        else
+        {
+            build();
+        }
+
+        //TODO: Update asset to make playing easier (differentiate between what is to be placed and what is already placed)
+    }
+
     public void build()
     {
         if(toBuild==null)
@@ -31,11 +46,21 @@ public class BuildSite : Building {
             return;
         }
 
-        toBuild.Initialise();
+        if (buildTurn)
+        {
+            toBuild.Initialise();
+            MonoBehaviour.Destroy(buildingObject);
+        }
     }
 
     public void hide()
     {
         buildingObject.transform.position = new Vector3(0, 0, -100);
+    }
+
+    public void show()
+    {
+        Vector3 coords = tile.getWorldCoords();
+        buildingObject.transform.position = coords;
     }
 }
