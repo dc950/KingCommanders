@@ -1,0 +1,72 @@
+TILES
+
+Randomly Generate? Pre-set levels would be easier to balance.
+
+- Create different materials/objects for each possible adjacency?
+- Swamps - slow down.
+- Roads - speed up - can be built.
+- river - impassable.
+- ford - on river - slows down.
+- rock - mines can be built - Same pace
+
+
+UNITS
+
+Soldier
+- Attacks when close
+- Can attack walls
+
+Archer
+- Shoots soldiers and catapults from far away.  
+- No damage to stone.  
++ Can damage wood with fire arrows? 
++ More health = more arrows (damage)?
++ Can shoot further if on wall?
+
+Catapult
+- Slow
+- long reloads.  
+- Does massive damage to walls or large enemy groups
+
+BUILDINGS
+
+Wall (Stone)
+- Units can't go through
+
+Gate (Stone)
+- Friendly units can go through (slowly)
+
+Tower (Stone)
+- Shoots enemy units
+
+Mine (Wood)
+- Earns money
+- Must be placed on rocks
+
+Farm (Wood)
+- Earns money (less than mine)
+- must be placed on farm
+
+Keep (Stone/raidable)
+- Can raise 1 troop per turn
+- Game loss on destruction
+ 
+ Barracks (Stone)
+ - Can raise 1 troop per turn
+
+MECHANICS
+
+- Types of buildings only affect damage - all bought by money to keep simple
+- Building further from keep costs more for defenses, less for mines/farms.
+
+SPECIAL ACTIONS
+
+
+
+
+
+
+
+THINGS TO REMEBER TO DO
+
+When clicked on a unit when commanding: Add to path etc. as it block tile.  Same with keeps/interaction buildings

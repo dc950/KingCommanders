@@ -1,0 +1,29 @@
+CORE MECHANICS
+	TURNS
+		Basic turn method.
+		Money.
+		Attack state.
+		Hide previous players move?
+	COMMANDING
+		Block walls etc.
+	ATTACKING
+		Movement.
+		Assign specific coords.
+		Health.
+		Avoid collisions with other units.
+Art   
+					
+Tidying
+	Store UnitBuildings each player has - remove hacky buildsite build() and hide().                                                                                                                                                 
+
+
+
+Mid Term
+	Animation
+	More units
+	Balancing
+
+Long term
+	AI
+	Online
+	Damage States.

@@ -1,0 +1,224 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+public class StateController : MonoBehaviour {
+
+    //UI Stuff
+    Text stateText;
+    [SerializeField] GameObject btnStop;
+    [SerializeField] GameObject btnRecruit;
+    [SerializeField] GameObject pnlRecruit;
+    //States
+    public enum states { Idle, Placing, Recruiting, Commanding, Attacking };
+    public states state;
+    TurnController tc;
+    //Building stuff
+    private string bToPlace;
+    private bool contBuild = false;
+
+    //Recruiting Stuff
+    public Tile currRecruitTile; //gets activated when a spawner is clicked on so when unit is selected, it can be placed here.
+    //Unit stuff
+    public Unit unitCommanding;
+
+	// Use this for initialization
+	void Start () {
+        //get UIs
+        state = states.Idle;
+        stateText = GameObject.Find("State").GetComponent<Text>();
+
+        tc = ObjectDictionary.getTurnController();       
+	}
+
+    
+
+    public void setState(states newState)
+    {
+        if (newState == states.Placing)
+        {
+            state = newState;
+            stateText.text = state + " " + bToPlace;
+            btnStop.SetActive(true);
+        }
+        else if (newState == states.Idle)
+        {
+            state = newState;
+            stateText.text = state + "";
+            btnStop.SetActive(false);
+        }
+        else if (newState == states.Recruiting)
+        {
+            state = newState;
+            stateText.text = state + "";
+            btnStop.SetActive(false);
+        }
+        else if (newState == states.Commanding)
+        {
+            state = newState;
+            stateText.text = state + "";
+            btnStop.SetActive(true);
+        }
+    }
+
+    //***************************
+    //Placing Buildings
+    //***************************
+    //A new building is going to be placed - the usere has selected to build but not chosen where to yet
+    public void PlacingNewBuilding(string name)
+    {
+        bToPlace = name;
+        if (bToPlace == null)
+        {
+            Debug.Log("Error: building to Place is null");
+            return;
+        }
+
+        setState(states.Placing);
+
+        //If the object is a wall set variable for continous building
+        if (name == "Wall")
+        {
+            contBuild = true;
+        }
+
+
+    }
+
+    //A tile has been clicked while placing - build the tile
+    public void BuildBuilding(Tile tile)
+    {
+        if (state != states.Placing)
+        {
+            Debug.Log("Error: trying to build but not Placing");
+            return;
+        }
+
+        if (bToPlace == null)
+        {
+            Debug.Log("Error: trying to build but no building chosen");
+            return;
+        }
+
+        if (tile.owner != tc.getTurn())
+        {
+            Debug.Log("Current player does not own this tile!");
+            return;
+        }
+
+        if(tile.building == null && tile.units.Count == 0 && !tile.spawnTile)
+            ObjectDictionary.makeNewBuilding(bToPlace, tile);
+
+
+        if (!contBuild)
+        {
+            setState(states.Idle);
+            bToPlace = null;
+        }
+    }
+
+    //stops from placing/
+    public void Stop()
+    {
+        setState(states.Idle);
+        bToPlace = null;
+        unitCommanding = null;
+    }
+
+    //***************************
+    //Placing Units
+    //***************************
+
+    //Unit is to be chosen
+    public void StartRecruiting(Spawner spawner)
+    {
+        if(spawner.tile.owner != tc.getTurn())
+        {
+            Debug.Log("Not current players keep!");
+            return;
+        }
+
+        btnRecruit.SetActive(true);
+        pnlRecruit.SetActive(true);
+        currRecruitTile = spawner.spawnTile;
+        setState(states.Recruiting);
+    }
+
+    //Unit is to be placed
+    public void PlaceNewUnit(string name)
+    {
+        ObjectDictionary.makeNewUnit(name, currRecruitTile);
+    }
+
+    //***************************
+    //Commanding Units
+    //***************************
+
+    //A valid Unit has been clicked on: enter Commanding mode
+    public void CommandUnit(Unit unit)
+    {
+        if (unit.owner == tc.getTurn())
+        {
+            setState(states.Commanding);
+            unitCommanding = unit;
+        }
+    }
+
+    public void AddToPath(Tile tile)
+    {
+        if (unitCommanding == null)
+        {
+            Debug.Log("Error: unitCommadning = null");
+            return;
+        }
+        //Tile clicked is not a neighbour to thign in path  -for now, returns - later might implement Dijsdfwewafstras algorithm
+        else if (unitCommanding.path.Count >= 1)
+        {
+            if (!unitCommanding.path[unitCommanding.path.Count-1].neighbours.ContainsValue(tile))
+            {
+                return;
+            }
+        }
+
+        Debug.Log("Adding " + tile.x + "," + tile.y);
+        unitCommanding.path.Add(tile);
+
+    }
+
+    public void Update()
+    {
+        //Draw Line for unitCommanding
+        if (unitCommanding == null)
+        {
+            return;
+        }
+        if (unitCommanding.path == null)
+        {
+            return;
+        }
+        if (unitCommanding.path.Count == 0)
+        {
+            return;
+        }
+
+        int currentTile = 0;
+        int nextTile = 1;
+
+        while (nextTile < unitCommanding.path.Count)
+        {
+            Vector3 start = TileMap.CoordsToWorld(unitCommanding.path[currentTile].x, unitCommanding.path[currentTile].y);
+            Vector3 end = TileMap.CoordsToWorld(unitCommanding.path[nextTile].x, unitCommanding.path[nextTile].y);
+
+            Debug.DrawLine(start, end, Color.blue);
+            currentTile = nextTile;
+            nextTile++;
+        }
+
+        //Do first bit as well
+        Vector3 start2 = TileMap.CoordsToWorld(unitCommanding.curTile.x, unitCommanding.curTile.y);
+        Vector3 end2 = TileMap.CoordsToWorld(unitCommanding.path[0].x, unitCommanding.path[0].y);
+
+        Debug.DrawLine(start2, end2, Color.blue);
+    }
+            
+}
