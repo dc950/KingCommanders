@@ -4,7 +4,6 @@ using System.Collections;
 public abstract class Building : UnitBuilding{
 
     public Tile tile;
-    public GameObject buildingObject;
     public bool wallConnect = false;
     public int owner;
 
@@ -35,7 +34,7 @@ public abstract class Building : UnitBuilding{
 
     public override void DeleteObject()
     {
-        Object.Destroy(buildingObject);
-        buildingObject = null;
+        Object.Destroy(ubObject);
+        ubObject = null;
     }
 }

@@ -54,7 +54,7 @@ public class Wall : Building {
         if (!n && !s && !w && !e)
         {
             Vector3 angle = new Vector3(270, 0, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallSingle, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallSingle, tile.getWorldCoords(), Quaternion.Euler(angle));
         }
 
 
@@ -64,7 +64,7 @@ public class Wall : Building {
         else if(n && !s && !w && !e)
         {
             Vector3 angle = new Vector3(270, 180, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallEnd, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallEnd, tile.getWorldCoords(), Quaternion.Euler(angle));
             if(!updating)
                 UpdateNeighbour("N");
         }
@@ -72,7 +72,7 @@ public class Wall : Building {
         else if (!n && s && !w && !e)
         {
             Vector3 angle = new Vector3(270, 0, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallEnd, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallEnd, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating)
                 UpdateNeighbour("S");
         }
@@ -80,7 +80,7 @@ public class Wall : Building {
         else if (!n && !s && w && !e)
         {
             Vector3 angle = new Vector3(270, 90, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallEnd, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallEnd, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating)
                 UpdateNeighbour("W");
         }
@@ -88,7 +88,7 @@ public class Wall : Building {
         else if (!n && !s && !w && e)
         {
             Vector3 angle = new Vector3(270, 270, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallEnd, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallEnd, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating)
                 UpdateNeighbour("E");
         }
@@ -102,7 +102,7 @@ public class Wall : Building {
         else if (n && s && !w && !e)
         {
             Vector3 angle = new Vector3(270, 0, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallStraight, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallStraight, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating) {
                 UpdateNeighbour("N");
                 UpdateNeighbour("S");
@@ -111,7 +111,7 @@ public class Wall : Building {
         else if (!n && !s && w && e)
         {
             Vector3 angle = new Vector3(270, 90, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallStraight, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallStraight, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating) {
                 UpdateNeighbour("W");
                 UpdateNeighbour("E");
@@ -125,7 +125,7 @@ public class Wall : Building {
         else if (n && !s && !w && e)
         {
             Vector3 angle = new Vector3(270, 270, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallCorner, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallCorner, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating) {
                 UpdateNeighbour("N");
                 UpdateNeighbour("E");
@@ -134,7 +134,7 @@ public class Wall : Building {
         else if (!n && s && !w && e)
         {
             Vector3 angle = new Vector3(270, 0, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallCorner, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallCorner, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating) {
                 UpdateNeighbour("E");
                 UpdateNeighbour("S");
@@ -143,7 +143,7 @@ public class Wall : Building {
         else if (!n && s && w && !e)
         {
             Vector3 angle = new Vector3(270, 90, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallCorner, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallCorner, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating) {
                 UpdateNeighbour("S");
                 UpdateNeighbour("W");
@@ -152,7 +152,7 @@ public class Wall : Building {
         else if (n && !s && w && !e)
         {
             Vector3 angle = new Vector3(270, 180, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallCorner, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallCorner, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating) {
                 UpdateNeighbour("N");
                 UpdateNeighbour("W");
@@ -166,7 +166,7 @@ public class Wall : Building {
         else if (n && s && !w && e)
         {
             Vector3 angle = new Vector3(270, 270, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallT, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallT, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating) {
                 UpdateNeighbour("N");
                 UpdateNeighbour("E");
@@ -176,7 +176,7 @@ public class Wall : Building {
         else if (!n && s && w && e)
         {
             Vector3 angle = new Vector3(270, 0, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallT, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallT, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating) {
                 UpdateNeighbour("E");
                 UpdateNeighbour("S");
@@ -186,7 +186,7 @@ public class Wall : Building {
         else if (n && s && w && !e)
         {
             Vector3 angle = new Vector3(270, 90, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallT, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallT, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating) {
                 UpdateNeighbour("S");
                 UpdateNeighbour("W");
@@ -196,7 +196,7 @@ public class Wall : Building {
         else if (n && !s && w && e)
         {
             Vector3 angle = new Vector3(270, 180, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallT, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallT, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating)
             {
                 UpdateNeighbour("W");
@@ -212,7 +212,7 @@ public class Wall : Building {
         else if (n && s && w && e)
         {
             Vector3 angle = new Vector3(270, 0, 0);
-            buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallCross, tile.getWorldCoords(), Quaternion.Euler(angle));
+            ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().wallCross, tile.getWorldCoords(), Quaternion.Euler(angle));
             if (!updating) {
                 UpdateNeighbour("N");
                 UpdateNeighbour("W");

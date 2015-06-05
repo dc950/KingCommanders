@@ -6,7 +6,6 @@ public abstract class Unit : UnitBuilding {
     public float speed = 5;
     public Tile curTile;
     public List<Tile> path;
-    public GameObject unitObject;
     public int owner;
 
     public Unit(int maxHealth, Tile tile, int amount) : base(maxHealth)
@@ -24,12 +23,13 @@ public abstract class Unit : UnitBuilding {
 
     public void PlaceObjects()
     {
-        unitObject = ((GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().soldier, curTile.getWorldCoords(), Quaternion.identity));
+        ubObject = ((GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().soldier, curTile.getWorldCoords(), Quaternion.identity));
+        displayHealthBar();
     }
 
     public override void DeleteObject()
     {
-        MonoBehaviour.Destroy(unitObject);
+        MonoBehaviour.Destroy(ubObject);
     }
 
     public override void Destroy()

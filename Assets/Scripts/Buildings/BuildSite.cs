@@ -13,9 +13,9 @@ public class BuildSite : Building {
     public override void PlaceObject()
     {
         Vector3 angle = new Vector3(90, 0, 0);
-        buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().buildSite, tile.getWorldCoords(), Quaternion.Euler(angle));
+        ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().buildSite, tile.getWorldCoords(), Quaternion.Euler(angle));
 
-        buildingObject.GetComponent<BuildSiteObj>().buildSite = this;
+        ubObject.GetComponent<BuildSiteObj>().buildSite = this;
     }
 
     public void AssignBuilding(Building building)
@@ -34,18 +34,18 @@ public class BuildSite : Building {
         //Make sure no enemies are nearby or on this tile or something
 
         toBuild.Initialise();
-        MonoBehaviour.Destroy(buildingObject);
+        MonoBehaviour.Destroy(ubObject);
     }
 
 
     public void hide()
     {
-        buildingObject.transform.position = new Vector3(0, 0, -100);
+        ubObject.transform.position = new Vector3(0, 0, -100);
     }
 
     public void show()
     {
         Vector3 coords = tile.getWorldCoords();
-        buildingObject.transform.position = coords;
+        ubObject.transform.position = coords;
     }
 }

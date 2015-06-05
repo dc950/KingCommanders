@@ -16,6 +16,11 @@ public class ObjectDictionary : MonoBehaviour {
     //units
     public GameObject soldier;
 
+    public GameObject healthBar;
+
+    public GameObject camera;
+
+
     public List<string> buildingNames;
     public List<string> unitNames;
 
@@ -89,7 +94,7 @@ public class ObjectDictionary : MonoBehaviour {
         {
             Unit soldier = new Soldier(tile);
             soldier.Initialise(getTurnController().getTurn());
-            soldier.unitObject.GetComponent<SoldiersObj>().soldier = (Soldier)soldier;
+            soldier.getObject().GetComponent<SoldiersObj>().soldier = (Soldier)soldier;
         }
     }
 

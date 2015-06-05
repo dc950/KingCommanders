@@ -29,9 +29,9 @@ public class Keep : Spawner {
         }
 
         Vector3 angle = new Vector3(0, angleNo, 0);
-        buildingObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().keep, tile.getWorldCoords(), Quaternion.Euler(angle));
+        ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().keep, tile.getWorldCoords(), Quaternion.Euler(angle));
 
-        buildingObject.GetComponent<KeepObj>().keep = this;
+        ubObject.GetComponent<KeepObj>().keep = this;
     }
 
 	void setSpawnTile()
