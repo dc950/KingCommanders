@@ -5,10 +5,15 @@ using UnityEngine.UI;
 public class TurnController : MonoBehaviour {
 
     //Players
-    int currentTurn = 0;
+    public int currentTurn = 0;
     public Dictionary<int, Player> players;
     public Text textTurn;
     [SerializeField] int startingMoney;
+
+    //UI
+    [SerializeField] GameObject btnEndTurn;
+    [SerializeField] GameObject btnStartAttack;
+    [SerializeField] GameObject btnBuild;
 
     public void Start()
     {
@@ -33,7 +38,12 @@ public class TurnController : MonoBehaviour {
 
     public void updateText()
     {
-        textTurn.text = "Player " + currentTurn + "'s turn";
+        if (currentTurn < 3)
+            textTurn.text = "Player " + currentTurn + "'s turn";
+        else if (currentTurn == 3)
+            textTurn.text = "Awaiting for attack to commence...";
+        else if (currentTurn == 4)
+            textTurn.text = "Attacking...";
     }
 
     public void NextTurn()
@@ -46,44 +56,63 @@ public class TurnController : MonoBehaviour {
         //THIS IS THE METHOD FOR LOCAL 2 PLAYER - Move it accordingly and change it for later methods(ai, online etc.)
         if (currentTurn == 1)
         {
-            Debug.Log("Hiding p1 changes");
             //hide future plans form player 2
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("BuildSite"))
             {
-                if (!go.GetComponent<BuildSiteObj>().buildSite.buildTurn)
-                {
+                if(go.GetComponent<BuildSiteObj>().buildSite.owner == currentTurn)
                     go.GetComponent<BuildSiteObj>().buildSite.hide();
-                }
             }
 
             currentTurn = 2;
+
+            updateText();
         }
         else if (currentTurn==2)
         {
-            //TODO: ENABLE ATTACK MODE
+            //Hide buildings
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("BuildSite"))
+            {
+                if(go.GetComponent<BuildSiteObj>().buildSite.owner == currentTurn)
+                    go.GetComponent<BuildSiteObj>().buildSite.hide();
+            }
 
-            Debug.Log("Showing buildings");
-            //Build buildings
+            currentTurn = 3;
+
+            updateText();
+
+            btnEndTurn.SetActive(false);
+            btnStartAttack.SetActive(true);
+            btnBuild.SetActive(false);
+
+        }
+        else if(currentTurn == 3)
+        {
+            //Show
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("BuildSite"))
             {
                 go.GetComponent<BuildSiteObj>().buildSite.show();
             }
 
-            Debug.Log("Advancing buildings");
-            //Advance BuildSites
+            btnStartAttack.SetActive(false);
+
+            
+
+            currentTurn = 4;
+            updateText();
+        }
+        else if(currentTurn == 4)
+        {
+            btnEndTurn.SetActive(true);
+            btnBuild.SetActive(true);
+
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("BuildSite"))
             {
-                go.GetComponent<BuildSiteObj>().buildSite.Advance();
+                go.GetComponent<BuildSiteObj>().buildSite.Build();
             }
 
-            //TODO: Commence attack button
-
             currentTurn = 1;
-
+            updateText();
         }
-
-        
-
-        updateText();
-    }
+    } 
 }
+

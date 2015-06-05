@@ -22,40 +22,55 @@ public class StateController : MonoBehaviour {
     //Unit stuff
     public Unit unitCommanding;
 
+    //Time
+    public float turnTime = 5;
+    float currentTime = 0;
+
 	// Use this for initialization
 	void Start () {
         //get UIs
         state = states.Idle;
         stateText = GameObject.Find("State").GetComponent<Text>();
+        currentTime = turnTime;
 
         tc = ObjectDictionary.getTurnController();       
 	}
 
+    public void StartAttack()
+    {
+        tc.NextTurn();
+        setState(states.Attacking);
+    }
+
+    void EndAttack()
+    {
+        currentTime = turnTime;
+        setState(states.Idle);
+        tc.NextTurn();
+    }
     
 
     public void setState(states newState)
     {
+        state = newState;
+
         if (newState == states.Placing)
         {
-            state = newState;
             stateText.text = state + " " + bToPlace;
             btnStop.SetActive(true);
         }
         else if (newState == states.Idle)
         {
-            state = newState;
             stateText.text = state + "";
             btnStop.SetActive(false);
         }
         else if (newState == states.Recruiting)
         {
-            state = newState;
             stateText.text = state + "";
             btnStop.SetActive(false);
         }
         else if (newState == states.Commanding)
         {
-            state = newState;
             stateText.text = state + "";
             btnStop.SetActive(true);
         }
@@ -180,45 +195,58 @@ public class StateController : MonoBehaviour {
             }
         }
 
-        Debug.Log("Adding " + tile.x + "," + tile.y);
+        //Debug.Log("Adding " + tile.x + "," + tile.y);
         unitCommanding.path.Add(tile);
 
     }
 
+
+
     public void Update()
     {
+
         //Draw Line for unitCommanding
-        if (unitCommanding == null)
+
+        if (unitCommanding != null)
         {
-            return;
+            unitCommanding.ShowLine();
+
+            /*
+            int currentTile = 0;
+            int nextTile = 1;
+
+            while (nextTile < unitCommanding.path.Count)
+            {
+                Vector3 start = TileMap.CoordsToWorld(unitCommanding.path[currentTile].x, unitCommanding.path[currentTile].y);
+                Vector3 end = TileMap.CoordsToWorld(unitCommanding.path[nextTile].x, unitCommanding.path[nextTile].y);
+
+                Debug.DrawLine(start, end, Color.blue);
+                currentTile = nextTile;
+                nextTile++;
+            }
+
+            //Do first bit as well
+            Vector3 start2 = TileMap.CoordsToWorld(unitCommanding.curTile.x, unitCommanding.curTile.y);
+            Vector3 end2 = TileMap.CoordsToWorld(unitCommanding.path[0].x, unitCommanding.path[0].y);
+
+            Debug.DrawLine(start2, end2, Color.blue);
+                */
         }
-        if (unitCommanding.path == null)
+
+        //Count attack
+        if (state == states.Attacking)
         {
-            return;
+            currentTime -= Time.deltaTime;
+            if (currentTime <= 0)
+            {
+                EndAttack();
+                stateText.text = "Idle"; 
+            }
+            else
+            {
+                stateText.text = "Attacking: " + currentTime.ToString("F1");
+            }
         }
-        if (unitCommanding.path.Count == 0)
-        {
-            return;
-        }
-
-        int currentTile = 0;
-        int nextTile = 1;
-
-        while (nextTile < unitCommanding.path.Count)
-        {
-            Vector3 start = TileMap.CoordsToWorld(unitCommanding.path[currentTile].x, unitCommanding.path[currentTile].y);
-            Vector3 end = TileMap.CoordsToWorld(unitCommanding.path[nextTile].x, unitCommanding.path[nextTile].y);
-
-            Debug.DrawLine(start, end, Color.blue);
-            currentTile = nextTile;
-            nextTile++;
-        }
-
-        //Do first bit as well
-        Vector3 start2 = TileMap.CoordsToWorld(unitCommanding.curTile.x, unitCommanding.curTile.y);
-        Vector3 end2 = TileMap.CoordsToWorld(unitCommanding.path[0].x, unitCommanding.path[0].y);
-
-        Debug.DrawLine(start2, end2, Color.blue);
     }
             
 }

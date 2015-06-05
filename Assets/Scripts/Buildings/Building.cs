@@ -6,6 +6,7 @@ public abstract class Building : UnitBuilding{
     public Tile tile;
     public GameObject buildingObject;
     public bool wallConnect = false;
+    public int owner;
 
     public Building(int maxHealth, Tile tile) : base(maxHealth)
     {

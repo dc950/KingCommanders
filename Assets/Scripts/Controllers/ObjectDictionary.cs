@@ -69,14 +69,17 @@ public class ObjectDictionary : MonoBehaviour {
         }
         else
         {
-            Debug.LogError("new building name " + name + "not recognised");
+            Debug.LogError("new building name " + name + " not recognised");
             return;
         }
+
+        building.owner = getTurnController().currentTurn;
 
         //set up buildSites
         BuildSite theBuildSite = new BuildSite(building.tile);
         theBuildSite.AssignBuilding(building);
         theBuildSite.Initialise();
+        theBuildSite.owner = getTurnController().currentTurn;
     }
 
     public static void makeNewUnit(string name, Tile tile)
