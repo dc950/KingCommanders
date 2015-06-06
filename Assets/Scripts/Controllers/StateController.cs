@@ -63,6 +63,9 @@ public class StateController : MonoBehaviour {
         {
             stateText.text = state + "";
             btnStop.SetActive(false);
+
+            ObjectDictionary.getDictionary().setColliders(true);
+
         }
         else if (newState == states.Recruiting)
         {
@@ -73,6 +76,7 @@ public class StateController : MonoBehaviour {
         {
             stateText.text = state + "";
             btnStop.SetActive(true);
+            ObjectDictionary.getDictionary().setColliders(false);
         }
     }
 
@@ -170,7 +174,7 @@ public class StateController : MonoBehaviour {
     //***************************
 
     //A valid Unit has been clicked on: enter Commanding mode
-    public void CommandUnit(Unit unit)
+    public void UnitClicked(Unit unit)
     {
         if (unit.owner == tc.getTurn())
         {

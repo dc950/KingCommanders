@@ -16,6 +16,9 @@ public class ObjectDictionary : MonoBehaviour {
     //units
     public GameObject soldier;
 
+    public List<BoxCollider> unitColliders;
+
+
     public GameObject healthBar;
 
     public GameObject mainCamera;
@@ -111,5 +114,14 @@ public class ObjectDictionary : MonoBehaviour {
     public static StateController getStateController()
     {
         return getDictionary().GetComponent<StateController>();
+    }
+
+
+    public void setColliders(bool state)
+    {
+        foreach(BoxCollider bc in unitColliders)
+        {
+            bc.enabled = state;
+        }
     }
 }

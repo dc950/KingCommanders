@@ -38,7 +38,9 @@ public abstract class UnitBuilding {
     {
         health -= damage;
         if (health <= 0)
-            Destroy();
+        {
+            Destroy(); 
+        }
 
         Debug.Log("Damage Taken,  Remaining Health: " + health + "/" + maxHealth);
 
@@ -64,11 +66,7 @@ public abstract class UnitBuilding {
 
     public void displayHealthBar()
     {
-        Vector3 position = new Vector3(0, 0, 0);
-       // Vector3 position = ubObject.transform.position;
-        //position.y = 1.5f;
-
-        Quaternion rot = ObjectDictionary.getDictionary().camera.transform.rotation;
+        Quaternion rot = ObjectDictionary.getDictionary().mainCamera.transform.rotation;
 
         healthBar = ((GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().healthBar, ubObject.transform.position, rot));
         

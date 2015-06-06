@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Wall : Building {
 
-    public Wall(Tile tile) : base(10, tile)
+    public Wall(Tile tile) : base(3000, tile)
     {
 
     }

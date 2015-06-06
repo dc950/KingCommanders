@@ -31,13 +31,14 @@ public abstract class Unit : UnitBuilding {
 
     public override void DeleteObject()
     {
+        ObjectDictionary.getDictionary().unitColliders.Remove(ubObject.GetComponent<BoxCollider>());
         MonoBehaviour.Destroy(ubObject);
     }
 
     public override void Destroy()
     {
-        DeleteObject();
         curTile.unit = null;
+        DeleteObject();
     }
 
     public abstract void Attack(UnitBuilding target);

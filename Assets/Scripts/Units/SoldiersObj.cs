@@ -5,28 +5,60 @@ public class SoldiersObj : MonoBehaviour {
 
     public Soldier soldier;
     StateController sc;
+
+    public UnitBuilding target;
+    public float curCooldown, cooldown;
+
     
     // Use this for initialization
 	void Start () {
         sc = ObjectDictionary.getStateController();
+        cooldown = 0.01f;
+        curCooldown = 0;
+        ObjectDictionary.getDictionary().unitColliders.Add(GetComponent<BoxCollider>());
 	}
 
-
-	
 	// Update is called once per frame
 	void Update () {
         if (sc.state == StateController.states.Attacking)
         {
-            move();
-            soldier.ShowLine();
+            if(target != null)
+            {
+                attack();
+            }
+            else
+            {
+                move();
+            }
+            
+            //soldier.ShowLine();
         }
 	}
+
+    void attack()
+    {
+        Debug.Log("attacking: cooldown at "+curCooldown+", t.dt = "+Time.deltaTime);
+        if (curCooldown <= 0)
+        {
+            soldier.Attack(target);
+            curCooldown = cooldown;
+        }
+        else
+        {
+            curCooldown -= Time.deltaTime;
+        }
+
+        if(target.getHealth() <= 0)
+        {
+            target = null;
+        }
+    }
 
      void move()
     {
          if(soldier.underAttack != null) //nothing in the way but under attack from blocking unit (e.g. soldiers) - fight back
          {
-             soldier.Attack(soldier.underAttack);
+             target = soldier.underAttack;
          }
 
          //Check if need to move
@@ -61,8 +93,7 @@ public class SoldiersObj : MonoBehaviour {
             {
                 if (nextTile.building.owner != soldier.owner)  //Enemy building, attack!
                 {
-                    //TODO: Attack enemy building
-                    Debug.Log("attack...");
+                    target = nextTile.building;
                     return;
                 }
                 else //building is owned by player
@@ -74,8 +105,7 @@ public class SoldiersObj : MonoBehaviour {
             {
                 if(nextTile.unit.owner != soldier.owner) 
                 {
-                    //attack enemy unit
-                    Debug.Log("attack...");
+                    target = nextTile.unit;
                     return;
                 }
                 else
@@ -87,12 +117,12 @@ public class SoldiersObj : MonoBehaviour {
          
         }
 
-        Vector3 target = new Vector3(0,0,0);
+        Vector3 moveTarget = new Vector3(0,0,0);
 
-        target.x = soldier.path[1].getWorldCoords().x;
-        target.z = soldier.path[1].getWorldCoords().z;
+        moveTarget.x = soldier.path[1].getWorldCoords().x;
+        moveTarget.z = soldier.path[1].getWorldCoords().z;
         //Debug.Log("Target: "+ soldier.path[1].x +","+soldier.path[1].y+"      Position: " + target.x + "," + target.y);
-        this.transform.position = Vector3.MoveTowards(transform.position, target, soldier.speed/1000);
+        this.transform.position = Vector3.MoveTowards(transform.position, moveTarget, soldier.speed / 1000);
     }
 
 
@@ -111,6 +141,10 @@ public class SoldiersObj : MonoBehaviour {
    
     void OnMouseDown()
     {
-        ObjectDictionary.getStateController().CommandUnit(soldier);
+        ObjectDictionary.getStateController().UnitClicked(soldier);
     }
+
+
+
+
 }
