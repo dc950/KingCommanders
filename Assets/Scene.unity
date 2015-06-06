@@ -580,6 +580,7 @@ MonoBehaviour:
   keep: {fileID: 148438, guid: c3a50b6ab010a974d83854995d93488e, type: 2}
   buildSite: {fileID: 109474, guid: 572643833bec4d84b80a85ea3756340a, type: 2}
   soldier: {fileID: 175514, guid: 4b18dfabf006ddf4990b0214fa6654cb, type: 2}
+  unitColliders: []
   healthBar: {fileID: 115520, guid: 3a5216f2a375eeb438233e59c0157691, type: 2}
   mainCamera: {fileID: 1589108539}
   buildingNames: []

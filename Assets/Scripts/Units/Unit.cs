@@ -73,4 +73,28 @@ public abstract class Unit : UnitBuilding {
             ShowLine();
         }
     }
+
+    public void AddToPath(Tile targetTile)
+    {
+        //If path contains tile, move back to it
+        if(path.Contains(targetTile))
+        {
+            path.RemoveRange(path.IndexOf(targetTile), path.Count - path.IndexOf(targetTile));
+            //for(int i = path.Count; i >= path.IndexOf(targetTile); i-- )
+        }
+
+        if (path.Count >= 1)
+        {
+            if (!path[path.Count - 1].neighbours.ContainsValue(targetTile))
+            {
+                List<Tile> newPath = ObjectDictionary.getTileMap().findPath(path[path.Count-1], targetTile);
+                path.AddRange(newPath);
+            }
+        }
+
+        //Debug.Log("Adding " + tile.x + "," + tile.y);
+        path.Add(targetTile);
+    }
+
+
 }

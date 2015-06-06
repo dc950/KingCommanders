@@ -190,17 +190,8 @@ public class StateController : MonoBehaviour {
             Debug.Log("Error: unitCommadning = null");
             return;
         }
-        //Tile clicked is not a neighbour to thign in path  -for now, returns - later might implement Dijsdfwewafstras algorithm
-        else if (unitCommanding.path.Count >= 1)
-        {
-            if (!unitCommanding.path[unitCommanding.path.Count-1].neighbours.ContainsValue(tile))
-            {
-                return;
-            }
-        }
 
-        //Debug.Log("Adding " + tile.x + "," + tile.y);
-        unitCommanding.path.Add(tile);
+        unitCommanding.AddToPath(tile);
 
     }
 

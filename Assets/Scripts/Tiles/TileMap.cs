@@ -155,4 +155,78 @@ public class TileMap : MonoBehaviour
         ObjectDictionary.makeNewBuilding("Keep", tile1, player1);
         ObjectDictionary.makeNewBuilding("Keep", tile2, player2);
     }
+
+    public List<Tile> findPath(Tile source, Tile target)
+    {
+        Debug.Log("Finding path");
+
+        Dictionary<Tile, int> distance;
+        Dictionary<Tile, Tile> previous;
+        List<Tile> unvisitedNodes;
+
+        unvisitedNodes = new List<Tile>();
+
+        distance = new Dictionary<Tile, int>();
+        previous = new Dictionary<Tile, Tile>();
+
+        distance.Add(source, 0);
+
+        //Intialise distances and previouses
+        foreach(Tile tile in tiles)
+        {
+            if(tile != source)
+            {
+                distance.Add(tile, 9999);
+                previous.Add(tile, null);
+            }
+            unvisitedNodes.Add(tile);
+        }
+
+        //while there are still unvisited nodes
+        while(unvisitedNodes.Count > 0)
+        {
+            Tile minTile = null;
+            int minDist = 9999;
+
+            //get node with min distance
+            foreach(Tile tile in unvisitedNodes)
+            {
+                if(distance[tile] < minDist)
+                {
+                    minTile = tile;
+                    minDist = distance[tile];
+                }
+            }
+
+            //remove it from unvisited
+            unvisitedNodes.Remove(minTile);
+            
+            //for all of it's neighbours
+            foreach(Tile tile in minTile.neighbours.Values)
+            {
+                int dist = distance[minTile] + 1; //find distance to here from neighbour ***Change this if speeds get added or to avoid walls or to deal with diagonals!!!!***
+                if(dist < distance[tile]) //new min distance to here found
+                {
+                    distance[tile] = dist;
+                    previous[tile] = minTile;
+                }
+            }
+        }
+
+        //step through previous from target and reverse to find the path
+        List<Tile> path = new List<Tile>();
+        Tile curr = target;
+
+
+        while(curr != source)
+        {
+            path.Add(curr);
+            curr = previous[curr];
+        }
+
+        path.Reverse();
+
+        return path;
+           
+    }
 }
