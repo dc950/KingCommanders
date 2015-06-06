@@ -7,9 +7,11 @@ public abstract class Unit : UnitBuilding {
     public Tile curTile;
     public List<Tile> path;
     public int owner;
+    public Unit underAttack;
 
     public Unit(int maxHealth, Tile tile, int amount) : base(maxHealth)
     {
+        underAttack = null;
         curTile = tile;
         path = new List<Tile>();
         path.Add(curTile);
@@ -35,10 +37,10 @@ public abstract class Unit : UnitBuilding {
     public override void Destroy()
     {
         DeleteObject();
-        curTile.units.Remove(this);
+        curTile.unit = null;
     }
 
-    public abstract void Attack();
+    public abstract void Attack(UnitBuilding target);
 
 
     public void ShowLine()
@@ -67,7 +69,6 @@ public abstract class Unit : UnitBuilding {
     {
         if (ObjectDictionary.getStateController().state == StateController.states.Attacking)
         {
-            Debug.Log("gogog");
             ShowLine();
         }
     }

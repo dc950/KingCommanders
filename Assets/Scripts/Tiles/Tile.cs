@@ -8,7 +8,7 @@ public class Tile {
 	public TileMap map;
 	GameObject tileObj;
     public Building building;
-    public List<Unit> units;
+    public Unit unit;
     public Dictionary<string, Tile> neighbours;
     public bool spawnTile = false;
     public int owner;
@@ -21,7 +21,7 @@ public class Tile {
 		this.map = map;
 		PlaceObject();
         building = null;
-        units = new List<Unit>();
+        unit = null;
 	}
 
     public List<Tile> getAllNeighbours()

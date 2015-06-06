@@ -24,6 +24,11 @@ public class SoldiersObj : MonoBehaviour {
 
      void move()
     {
+         if(soldier.underAttack != null) //nothing in the way but under attack from blocking unit (e.g. soldiers) - fight back
+         {
+             soldier.Attack(soldier.underAttack);
+         }
+
          //Check if need to move
         if(soldier.path.Count < 2)
         {
@@ -34,16 +39,53 @@ public class SoldiersObj : MonoBehaviour {
         if(atNextPosition())
         {
             //Debug.Log("Removoing path point: " + soldier.path[0].x + "," + soldier.path[0].y);
+            soldier.curTile.unit = null;
             soldier.path.RemoveAt(0);
             soldier.curTile = soldier.path[0];
+            soldier.curTile.unit = soldier;
         }
-        //Check if stilil need to move
+        //Check if still need to move
         if (soldier.path.Count < 2)
         {
             //Debug.Log("Count < 2 (2)");
             return;
         }
 
+        Tile nextTile = soldier.path[1];
+
+        //See if the next tile is free
+        if(nextTile.building != null || nextTile.unit != null)
+        {
+            //Tile is not free: attack or stop - buildings are attacked first
+            if (soldier.path[1].building != null) //building
+            {
+                if (nextTile.building.owner != soldier.owner)  //Enemy building, attack!
+                {
+                    //TODO: Attack enemy building
+                    Debug.Log("attack...");
+                    return;
+                }
+                else //building is owned by player
+                {
+                    //TODO: walk through building if possible, deppending on building type
+                }
+            }
+            else //unit
+            {
+                if(nextTile.unit.owner != soldier.owner) 
+                {
+                    //attack enemy unit
+                    Debug.Log("attack...");
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+         
+        }
 
         Vector3 target = new Vector3(0,0,0);
 
@@ -51,7 +93,6 @@ public class SoldiersObj : MonoBehaviour {
         target.z = soldier.path[1].getWorldCoords().z;
         //Debug.Log("Target: "+ soldier.path[1].x +","+soldier.path[1].y+"      Position: " + target.x + "," + target.y);
         this.transform.position = Vector3.MoveTowards(transform.position, target, soldier.speed/1000);
-
     }
 
 

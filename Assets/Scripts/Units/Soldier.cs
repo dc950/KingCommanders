@@ -3,17 +3,17 @@ using System.Collections;
 
 public class Soldier : Unit {
 
-    
+    public int strength = 3;
 
 	public Soldier(Tile tile) : base(10, tile, 3)
     {
 
     }
 
-    public override void Attack()
+    public override void Attack(UnitBuilding target)
     {
         //Change object animations
 
-        //do health things with building/unit
+        target.takeDamage(strength);
     }
 }

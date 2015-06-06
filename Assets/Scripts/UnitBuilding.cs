@@ -12,7 +12,7 @@ public abstract class UnitBuilding {
     {
         this.maxHealth = maxHealth;
         health = maxHealth;
-        
+        Debug.Log("Unit created with " + maxHealth + "max hp and " + health + "current hp");
     }
 
     public GameObject getObject()
@@ -40,7 +40,9 @@ public abstract class UnitBuilding {
         if (health <= 0)
             Destroy();
 
-        healthBar.GetComponent<HealthBar>().HandleHealth();
+        Debug.Log("Damage Taken,  Remaining Health: " + health + "/" + maxHealth);
+
+        updateHealthBar();
     }
 
     public void heal(int healAmmount)
@@ -48,6 +50,8 @@ public abstract class UnitBuilding {
         health += healAmmount;
         if (health > maxHealth)
             health = maxHealth;
+
+        updateHealthBar();
     }
 
     public void updateHealthBar()
@@ -67,9 +71,11 @@ public abstract class UnitBuilding {
         Quaternion rot = ObjectDictionary.getDictionary().camera.transform.rotation;
 
         healthBar = ((GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().healthBar, ubObject.transform.position, rot));
-
-        healthBar.GetComponent<HealthBar>().unitBuilding = this;
+        
+        healthBar.GetComponent<HealthBar>().Initialise(this);
         healthBar.transform.SetParent(getObject().transform);
+
         updateHealthBar();
+
     }
 }

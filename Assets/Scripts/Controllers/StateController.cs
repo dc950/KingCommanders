@@ -121,7 +121,7 @@ public class StateController : MonoBehaviour {
             return;
         }
 
-        if(tile.building == null && tile.units.Count == 0 && !tile.spawnTile)
+        if(tile.building == null && tile.unit == null && !tile.spawnTile)
             ObjectDictionary.makeNewBuilding(bToPlace, tile);
 
 

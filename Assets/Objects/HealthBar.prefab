@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthTransform: {fileID: 22483480}
+  backgroundTransform: {fileID: 22485608}
   visualHealth: {fileID: 11465406}
 --- !u!114 &11440088
 MonoBehaviour:

@@ -18,7 +18,7 @@ public class ObjectDictionary : MonoBehaviour {
 
     public GameObject healthBar;
 
-    public GameObject camera;
+    public GameObject mainCamera;
 
 
     public List<string> buildingNames;
