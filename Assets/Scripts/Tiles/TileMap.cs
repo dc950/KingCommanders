@@ -226,6 +226,14 @@ public class TileMap : MonoBehaviour
 
         path.Reverse();
 
+        string s = "";
+         foreach(Tile t in path)
+        {
+            s += "("+t.x+","+t.y+")"+", ";
+        }
+        Debug.Log("Adding path: "+s);
+
+
         return path;
            
     }

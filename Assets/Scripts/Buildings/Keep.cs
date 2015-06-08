@@ -5,7 +5,7 @@ public class Keep : Spawner {
 
     public Player player;
 
-    public Keep (Tile tile, Player player) : base(50, tile)
+    public Keep (Tile tile, Player player) : base(10000, tile)
     {
         this.player = player;
         setSpawnTile();

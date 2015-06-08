@@ -12,7 +12,7 @@ public abstract class UnitBuilding {
     {
         this.maxHealth = maxHealth;
         health = maxHealth;
-        Debug.Log("Unit created with " + maxHealth + "max hp and " + health + "current hp");
+        //Debug.Log("Unit created with " + maxHealth + "max hp and " + health + "current hp");
     }
 
     public GameObject getObject()
@@ -42,7 +42,7 @@ public abstract class UnitBuilding {
             Destroy(); 
         }
 
-        Debug.Log("Damage Taken,  Remaining Health: " + health + "/" + maxHealth);
+        //Debug.Log("Damage Taken,  Remaining Health: " + health + "/" + maxHealth);
 
         updateHealthBar();
     }

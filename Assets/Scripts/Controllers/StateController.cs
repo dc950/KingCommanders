@@ -46,6 +46,14 @@ public class StateController : MonoBehaviour {
     {
         currentTime = turnTime;
         setState(states.Idle);
+
+        foreach(GameObject go in GameObject.FindGameObjectsWithTag("Unit"))
+        {
+            Soldier s = go.GetComponent<SoldiersObj>().soldier;
+            Debug.Log(s.owner + ": " + s.curTile.unit.owner);
+        }
+
+
         tc.NextTurn();
     }
     

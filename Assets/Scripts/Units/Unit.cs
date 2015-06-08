@@ -77,23 +77,35 @@ public abstract class Unit : UnitBuilding {
     public void AddToPath(Tile targetTile)
     {
         //If path contains tile, move back to it
-        if(path.Contains(targetTile))
+        if(path.Contains(targetTile) && path.Count > 1 && targetTile != path[path.Count-1]) //we can remove so long as path is greater than 1 and not last bit in path is selected
         {
-            path.RemoveRange(path.IndexOf(targetTile), path.Count - path.IndexOf(targetTile));
-            //for(int i = path.Count; i >= path.IndexOf(targetTile); i-- )
+
+
+            path.RemoveRange( (path.IndexOf(targetTile) + 1), path.Count - path.IndexOf(targetTile) - 1);
+            return;
         }
 
-        if (path.Count >= 1)
+        string s = "";
+        foreach(Tile t in path)
         {
-            if (!path[path.Count - 1].neighbours.ContainsValue(targetTile))
-            {
-                List<Tile> newPath = ObjectDictionary.getTileMap().findPath(path[path.Count-1], targetTile);
-                path.AddRange(newPath);
-            }
+            s += "("+t.x+","+t.y+")"+", ";
         }
+
+        Debug.Log("about to do thing, path is "+ s);
+        Debug.Log("path.Count is " + path.Count);
+        if (!path[path.Count - 1].neighbours.ContainsValue(targetTile))
+        {
+            List<Tile> newPath = ObjectDictionary.getTileMap().findPath(path[path.Count-1], targetTile);
+            path.AddRange(newPath);
+        }
+        else
+        {
+            path.Add(targetTile);
+        }
+
 
         //Debug.Log("Adding " + tile.x + "," + tile.y);
-        path.Add(targetTile);
+        
     }
 
 
