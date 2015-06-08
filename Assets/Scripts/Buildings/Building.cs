@@ -5,9 +5,8 @@ public abstract class Building : UnitBuilding{
 
     public Tile tile;
     public bool wallConnect = false;
-    public int owner;
 
-    public Building(int maxHealth, Tile tile) : base(maxHealth)
+    public Building(int maxHealth, Tile tile, Player owner) : base(maxHealth, owner)
     {
         this.tile = tile;
         

@@ -14,6 +14,8 @@ public class TurnController : MonoBehaviour {
     [SerializeField] GameObject btnEndTurn;
     [SerializeField] GameObject btnStartAttack;
     [SerializeField] GameObject btnBuild;
+    [SerializeField] GameObject P1Money;
+    [SerializeField] GameObject P2Money;
 
     public void Start()
     {
@@ -24,8 +26,8 @@ public class TurnController : MonoBehaviour {
     public void SetupPlayers()
     {
         players = new Dictionary<int, Player>();
-        players.Add(1, new Player(1, startingMoney));
-        players.Add(2, new Player(2, startingMoney));
+        players.Add(1, new Player(1, startingMoney, P1Money.GetComponent<Text>()));
+        players.Add(2, new Player(2, startingMoney, P2Money.GetComponent<Text>()));
     }
 
     //***************************
@@ -46,6 +48,15 @@ public class TurnController : MonoBehaviour {
             textTurn.text = "Attacking...";
     }
 
+    public void updateMoneyUI()
+    {
+        foreach (Player p in players.Values)
+        {
+            p.updateMoneyUI();
+        }
+    }
+
+
     public void NextTurn()
     {
         if(ObjectDictionary.getStateController().state != StateController.states.Idle)
@@ -59,7 +70,7 @@ public class TurnController : MonoBehaviour {
             //hide future plans form player 2
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("BuildSite"))
             {
-                if(go.GetComponent<BuildSiteObj>().buildSite.owner == currentTurn)
+                if(go.GetComponent<BuildSiteObj>().buildSite.owner == getCurrentPlayer())
                     go.GetComponent<BuildSiteObj>().buildSite.hide();
             }
 
@@ -72,7 +83,7 @@ public class TurnController : MonoBehaviour {
             //Hide buildings
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("BuildSite"))
             {
-                if(go.GetComponent<BuildSiteObj>().buildSite.owner == currentTurn)
+                if(go.GetComponent<BuildSiteObj>().buildSite.owner == getCurrentPlayer())
                     go.GetComponent<BuildSiteObj>().buildSite.hide();
             }
 
@@ -95,7 +106,12 @@ public class TurnController : MonoBehaviour {
 
             btnStartAttack.SetActive(false);
 
-            
+            //get monies
+            foreach (Player p in players.Values)
+            {
+                Debug.Log("End turn for player " + p.playerNumber);
+                p.turnEnd();
+            }
 
             currentTurn = 4;
             updateText();
@@ -114,5 +130,15 @@ public class TurnController : MonoBehaviour {
             updateText();
         }
     } 
+
+    public Player getPlayer(int n)
+    {
+        return players[n];
+    }
+
+    public Player getCurrentPlayer()
+    {
+        return getPlayer(currentTurn);
+    }
 }
 

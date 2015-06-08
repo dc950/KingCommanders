@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Wall : Building {
 
-    public Wall(Tile tile) : base(3000, tile)
+    public Wall(Tile tile, Player owner) : base(3000, tile, owner)
     {
 
     }
@@ -220,6 +220,8 @@ public class Wall : Building {
                 UpdateNeighbour("E");
             }
         }
+
+        displayHealthBar();
     }
 
     public void Update()

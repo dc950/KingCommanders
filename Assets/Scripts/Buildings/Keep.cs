@@ -3,11 +3,8 @@ using System.Collections;
 
 public class Keep : Spawner {
 
-    public Player player;
-
-    public Keep (Tile tile, Player player) : base(10000, tile)
+    public Keep (Tile tile, Player owner) : base(10000, tile, owner)
     {
-        this.player = player;
         setSpawnTile();
     }
 	
@@ -19,7 +16,7 @@ public class Keep : Spawner {
     public override void PlaceObject()
     {
         int angleNo;
-        if(player.playerNumber==1)
+        if(owner.playerNumber==1)
         {
             angleNo = 90;
         }
@@ -36,7 +33,7 @@ public class Keep : Spawner {
 
 	void setSpawnTile()
     {
-        if(player.playerNumber==1) 
+        if(owner.playerNumber==1) 
         {
             spawnTile = tile.neighbours["E"];
         }

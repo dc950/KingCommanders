@@ -5,7 +5,7 @@ public class BuildSite : Building {
 
     public Building toBuild;
 
-    public BuildSite(Tile tile) : base(1, tile)
+    public BuildSite(Tile tile, Player owner) : base(1, tile, owner)
     {
 
     }

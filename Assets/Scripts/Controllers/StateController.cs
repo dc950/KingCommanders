@@ -47,13 +47,6 @@ public class StateController : MonoBehaviour {
         currentTime = turnTime;
         setState(states.Idle);
 
-        foreach(GameObject go in GameObject.FindGameObjectsWithTag("Unit"))
-        {
-            Soldier s = go.GetComponent<SoldiersObj>().soldier;
-            Debug.Log(s.owner + ": " + s.curTile.unit.owner);
-        }
-
-
         tc.NextTurn();
     }
     
@@ -184,7 +177,7 @@ public class StateController : MonoBehaviour {
     //A valid Unit has been clicked on: enter Commanding mode
     public void UnitClicked(Unit unit)
     {
-        if (unit.owner == tc.getTurn())
+        if (unit.owner == tc.getCurrentPlayer())
         {
             setState(states.Commanding);
             unitCommanding = unit;

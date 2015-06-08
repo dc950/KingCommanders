@@ -7,9 +7,11 @@ public abstract class UnitBuilding {
     int health, maxHealth;
     GameObject healthBar;
     protected GameObject ubObject;
+    public Player owner;
 
-    public UnitBuilding(int maxHealth)
+    public UnitBuilding(int maxHealth, Player owner)
     {
+        this.owner = owner;
         this.maxHealth = maxHealth;
         health = maxHealth;
         //Debug.Log("Unit created with " + maxHealth + "max hp and " + health + "current hp");

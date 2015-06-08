@@ -6,10 +6,9 @@ public abstract class Unit : UnitBuilding {
     public float speed = 5;
     public Tile curTile;
     public List<Tile> path;
-    public int owner;
     public Unit underAttack;
 
-    public Unit(int maxHealth, Tile tile, int amount) : base(maxHealth)
+    public Unit(int maxHealth, Tile tile, Player owner) : base(maxHealth, owner)
     {
         underAttack = null;
         curTile = tile;
@@ -17,10 +16,9 @@ public abstract class Unit : UnitBuilding {
         path.Add(curTile);
     }
 
-    public void Initialise(int turn)
+    public void Initialise()
     {
         PlaceObjects();
-        owner = turn; 
     }
 
     public void PlaceObjects()
@@ -79,20 +77,10 @@ public abstract class Unit : UnitBuilding {
         //If path contains tile, move back to it
         if(path.Contains(targetTile) && path.Count > 1 && targetTile != path[path.Count-1]) //we can remove so long as path is greater than 1 and not last bit in path is selected
         {
-
-
             path.RemoveRange( (path.IndexOf(targetTile) + 1), path.Count - path.IndexOf(targetTile) - 1);
             return;
         }
 
-        string s = "";
-        foreach(Tile t in path)
-        {
-            s += "("+t.x+","+t.y+")"+", ";
-        }
-
-        Debug.Log("about to do thing, path is "+ s);
-        Debug.Log("path.Count is " + path.Count);
         if (!path[path.Count - 1].neighbours.ContainsValue(targetTile))
         {
             List<Tile> newPath = ObjectDictionary.getTileMap().findPath(path[path.Count-1], targetTile);
@@ -101,11 +89,7 @@ public abstract class Unit : UnitBuilding {
         else
         {
             path.Add(targetTile);
-        }
-
-
-        //Debug.Log("Adding " + tile.x + "," + tile.y);
-        
+        }        
     }
 
 

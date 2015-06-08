@@ -16,7 +16,8 @@ public class DropMenus : MonoBehaviour {
         sc = ObjectDictionary.getStateController();
 
         //Fill Building
-        List<string> bNames = ObjectDictionary.getDictionary().buildingNames;
+        List<string> bNames = new List<string>();
+        bNames.AddRange(ObjectDictionary.getDictionary().buildingNames.Keys);
         for(int i = 0; i < bNames.Count; i++)
         {
             GameObject button = (GameObject) Instantiate(buttonPrefab);
@@ -29,8 +30,9 @@ public class DropMenus : MonoBehaviour {
         }
         
         //Fill recruit
-        List<string> uNames = ObjectDictionary.getDictionary().unitNames;
-        for (int i = 0; i < bNames.Count; i++)
+        List<string> uNames = new List<string>();
+        uNames.AddRange(ObjectDictionary.getDictionary().unitNames.Keys);
+        for (int i = 0; i < bNames.Count-1; i++)
         {
             GameObject button = (GameObject)Instantiate(buttonPrefab);
             button.GetComponentInChildren<Text>().text = uNames[i];

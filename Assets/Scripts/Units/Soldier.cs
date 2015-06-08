@@ -5,7 +5,7 @@ public class Soldier : Unit {
 
     public int strength = 3;
 
-	public Soldier(Tile tile) : base(1000, tile, 3)
+	public Soldier(Tile tile, Player owner) : base(1000, tile, owner)
     {
 
     }
