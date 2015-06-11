@@ -11,9 +11,7 @@ public class Soldier : Unit {
     }
 
     public override void PlaceObjects()
-    {
-        Vector3 angle = new Vector3(0, 90, 0);
-
+    { 
         ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().soldier, curTile.getWorldCoords(), Quaternion.identity);
         displayHealthBar();
     }
@@ -22,6 +20,14 @@ public class Soldier : Unit {
     {
         //Change object animations
 
-        target.takeDamage(strength);
+        float damage = (float) strength * ((float)getHealth() / (float)getMaxHealth());
+        if(damage < 1)
+        {
+            damage = 1;
+        }
+
+        //Debug.Log("Dealing damage: " + damage);
+
+        target.takeDamage((int)damage);
     }
 }

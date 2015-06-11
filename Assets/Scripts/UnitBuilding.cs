@@ -6,7 +6,7 @@ public abstract class UnitBuilding {
 
     int health, maxHealth;
     GameObject healthBar;
-    protected GameObject ubObject;
+    public GameObject ubObject;
     public Player owner;
 
     public UnitBuilding(int maxHealth, Player owner)

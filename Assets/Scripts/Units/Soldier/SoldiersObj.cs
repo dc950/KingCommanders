@@ -19,7 +19,7 @@ public class SoldiersObj : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         sc = ObjectDictionary.getStateController();
-        cooldown = 0.01f;
+        cooldown = 0.005f;
         curCooldown = 0;
         ObjectDictionary.getDictionary().unitColliders.Add(GetComponent<BoxCollider>());
         List<SoldierChar> soldierChars = new List<SoldierChar>();
@@ -29,6 +29,7 @@ public class SoldiersObj : MonoBehaviour {
 	void Update () {
         if (sc.state == StateController.states.Attacking)
         {
+            //Debug.Log("Moving: " + moving);
             if(!moving)
             {
                 if (soldier.path.Count > 2)
@@ -42,10 +43,27 @@ public class SoldiersObj : MonoBehaviour {
             if(target != null)
             {
                 attack();
+                moving = false;
             }
             else
             {
+                moving = true;
                 move();
+            }
+
+            float health = (float)soldier.getHealth();
+            float maxHealth = (float)soldier.getMaxHealth();
+
+            if((health/maxHealth)*100 < (soldierChars.Count-1) * 25)
+            {
+                Debug.Log("Health: " + health + ", MaxHealth " + maxHealth + ", HealthDiv: " + health / maxHealth + "Health pct: " + (health / maxHealth) * 100 + ", comp to" + (soldierChars.Count - 1) * 25 + "Where soldiercount -1 is" + (soldierChars.Count - 1));
+                //choose random dude to destroy
+                int num = Random.Range(0, soldierChars.Count - 1);
+                Debug.Log("Going to destroy "+num);
+                SoldierChar toDestroy = soldierChars[num];
+                soldierChars.Remove(toDestroy);
+                Destroy(toDestroy.gameObject);
+                Destroy(toDestroy);
             }
             
             //soldier.ShowLine();
