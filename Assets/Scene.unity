@@ -502,8 +502,6 @@ MonoBehaviour:
   unitColliders: []
   healthBar: {fileID: 115520, guid: 3a5216f2a375eeb438233e59c0157691, type: 2}
   mainCamera: {fileID: 1589108539}
-  buildingNames: []
-  unitNames: []
 --- !u!114 &377171738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +536,7 @@ MonoBehaviour:
   btnRecruit: {fileID: 602378320}
   pnlRecruit: {fileID: 1367920721}
   state: 0
-  turnTime: 5
+  turnTime: 15
 --- !u!1 &549183457
 GameObject:
   m_ObjectHideFlags: 0

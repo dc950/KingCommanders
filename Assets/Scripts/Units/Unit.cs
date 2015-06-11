@@ -21,11 +21,8 @@ public abstract class Unit : UnitBuilding {
         PlaceObjects();
     }
 
-    public void PlaceObjects()
-    {
-        ubObject = ((GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().soldier, curTile.getWorldCoords(), Quaternion.identity));
-        displayHealthBar();
-    }
+    public abstract void PlaceObjects();
+
 
     public override void DeleteObject()
     {
@@ -92,5 +89,9 @@ public abstract class Unit : UnitBuilding {
         }        
     }
 
+    public bool checkIfUnderAttack()
+    {
+        return underAttack != null;
+    }
 
 }

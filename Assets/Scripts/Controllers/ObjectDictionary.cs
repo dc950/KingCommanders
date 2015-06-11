@@ -129,7 +129,9 @@ public class ObjectDictionary : MonoBehaviour {
         {
             Unit soldier = new Soldier(tile, player);
             soldier.Initialise();
+            Debug.Log("Setting soldier...");
             soldier.getObject().GetComponent<SoldiersObj>().soldier = (Soldier)soldier;
+            Debug.Log(soldier.getObject().GetComponent<SoldiersObj>().soldier.getHealth());
         }
     }
 
