@@ -1,81 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class SoldiersObj : MonoBehaviour {
+public class SoldiersObj : UnitObj {
 
-    public Soldier soldier;
-    StateController sc;
-
-    public UnitBuilding target;
+    
     public float curCooldown, cooldown;
-    bool halfway = false;
-    public bool moving = false;
-    public string facingAngle;
-
-
-    public List<SoldierChar> soldierChars;
-
+    public Soldier soldier;
+    
     
     // Use this for initialization
 	void Start () {
-        sc = ObjectDictionary.getStateController();
+        base.initialise();
         cooldown = 0.005f;
         curCooldown = 0;
-        ObjectDictionary.getDictionary().unitColliders.Add(GetComponent<BoxCollider>());
-        List<SoldierChar> soldierChars = new List<SoldierChar>();
+
+        soldier = (Soldier)unit;
+ 
 	}
 
 	// Update is called once per frame
 	void Update () {
-        if (sc.state == StateController.states.Attacking)
-        {
-            //Debug.Log("Moving: " + moving);
-            if(!moving)
-            {
-                if (soldier.path.Count > 2)
-                {
-                    findNewFacing();
-                    setForward();
-                }
-            }
-
-
-            if(target != null)
-            {
-                attack();
-                moving = false;
-            }
-            else
-            {
-                moving = true;
-                move();
-            }
-
-            float health = (float)soldier.getHealth();
-            float maxHealth = (float)soldier.getMaxHealth();
-
-            if((health/maxHealth)*100 < (soldierChars.Count-1) * 25)
-            {
-                Debug.Log("Health: " + health + ", MaxHealth " + maxHealth + ", HealthDiv: " + health / maxHealth + "Health pct: " + (health / maxHealth) * 100 + ", comp to" + (soldierChars.Count - 1) * 25 + "Where soldiercount -1 is" + (soldierChars.Count - 1));
-                //choose random dude to destroy
-                int num = Random.Range(0, soldierChars.Count - 1);
-                Debug.Log("Going to destroy "+num);
-                SoldierChar toDestroy = soldierChars[num];
-                soldierChars.Remove(toDestroy);
-                Destroy(toDestroy.gameObject);
-                Destroy(toDestroy);
-            }
-            
-            //soldier.ShowLine();
-        }
-        else if(moving)
-        {
-            moving = false;
-        }
-
+        base.Update();
 	}
 
-    void attack()
+    public override void attack()
     {
         //Debug.Log("attacking: cooldown at "+curCooldown+", t.dt = "+Time.deltaTime);
         if (curCooldown <= 0)
@@ -94,10 +42,9 @@ public class SoldiersObj : MonoBehaviour {
         }
     }
 
-     void move()
+     public override void move()
     {
-        
-        
+
          if(soldier.checkIfUnderAttack()) //see if under attack
          {
              //Debug.Log("Under attack...");
@@ -221,14 +168,7 @@ public class SoldiersObj : MonoBehaviour {
     }
 
 
-    void setForward()
-     {
-        foreach(SoldierChar sc in soldierChars)
-        {
-            sc.facing = facingAngle;
-            sc.setNewFormPos();
-        }
-     }
+
 
     Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Vector3 angles)
     {
@@ -250,39 +190,7 @@ public class SoldiersObj : MonoBehaviour {
         }
     }
 
-    bool CheckHalfway()
-    {
-        //take away from smallest number
-        //divide by largest
-        //????
 
-        float x, y;
-
-        if(soldier.path[0].getWorldCoords().x > soldier.path[1].getWorldCoords().x)
-        {
-            x = Mathf.Abs(transform.position.x - soldier.path[1].getWorldCoords().x) / Mathf.Abs(soldier.path[0].getWorldCoords().x - soldier.path[1].getWorldCoords().x);
-        }
-        else
-        {
-            x = transform.position.x - soldier.path[0].getWorldCoords().x / (soldier.path[1].getWorldCoords().x - soldier.path[0].getWorldCoords().x);
-        }
-
-        if (soldier.path[0].getWorldCoords().z > soldier.path[1].getWorldCoords().z)
-        {
-            y = Mathf.Abs(transform.position.z - soldier.path[1].getWorldCoords().z) / Mathf.Abs(soldier.path[0].getWorldCoords().z - soldier.path[1].getWorldCoords().z);
-        }
-        else
-        {
-            y = transform.position.z - soldier.path[0].getWorldCoords().z / (soldier.path[1].getWorldCoords().z - soldier.path[0].getWorldCoords().z);
-        }
-
-
-
-
-        //Debug.Log("x: " + x + ", y: " + y);
-
-        return x < 0.5 && y < 0.5;
-    }
    
     void OnMouseDown()
     {
@@ -294,53 +202,6 @@ public class SoldiersObj : MonoBehaviour {
 
 
 
-    void findNewFacing()
-    {
-        bool n, s, w, e;
-
-        //discover if there are neighbours
-        n = soldier.path[1].neighbours.ContainsKey("N");
-        s = soldier.path[1].neighbours.ContainsKey("S");
-        w = soldier.path[1].neighbours.ContainsKey("W");
-        e = soldier.path[1].neighbours.ContainsKey("E");
-
-        //discover if they have buildings
-        if (n)
-        {
-            if (soldier.path[0].neighbours["N"] == soldier.path[1])
-            {
-                facingAngle = "N";
-                return;
-            }
-        }
-        if (s)
-        {
-             if (soldier.path[0].neighbours["S"] == soldier.path[1])
-            {
-            facingAngle = "S";
-            return;
-            }
-        }
-        if (w)
-        {
-            if (soldier.path[0].neighbours["W"] == soldier.path[1])
-            {
-            facingAngle = "W";
-            return;
-            }
-        }
-        if (e)
-        {
-            if (soldier.path[0].neighbours["E"] == soldier.path[1])
-            {
-                facingAngle = "E";
-                return;
-            }
-        }
-
-        Debug.Log("Error: no new facingAngle found");
-        facingAngle = null;
-
-    }
+    
 
 }
