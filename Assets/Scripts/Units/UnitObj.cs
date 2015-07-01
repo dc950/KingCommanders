@@ -58,10 +58,10 @@ public abstract class UnitObj : MonoBehaviour {
 
             if ((health / maxHealth) * 100 < (unitChars.Count - 1) * 25)
             {
-                Debug.Log("Health: " + health + ", MaxHealth " + maxHealth + ", HealthDiv: " + health / maxHealth + "Health pct: " + (health / maxHealth) * 100 + ", comp to" + (unitChars.Count - 1) * 25 + "Where unitcount -1 is" + (unitChars.Count - 1));
+                 //Debug.Log("Health: " + health + ", MaxHealth " + maxHealth + ", HealthDiv: " + health / maxHealth + "Health pct: " + (health / maxHealth) * 100 + ", comp to" + (unitChars.Count - 1) * 25 + "Where unitcount -1 is" + (unitChars.Count - 1));
                 //choose random dude to destroy
                 int num = Random.Range(0, unitChars.Count - 1);
-                Debug.Log("Going to destroy " + num);
+                //Debug.Log("Going to destroy " + num);
                 UnitChar toDestroy = unitChars[num];
                 unitChars.Remove(toDestroy);
                 Destroy(toDestroy.gameObject);

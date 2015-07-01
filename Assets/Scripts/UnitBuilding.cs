@@ -4,10 +4,15 @@ using UnityEngine.UI;
 
 public abstract class UnitBuilding {
 
-    int health, maxHealth;
+    float health, maxHealth;
     GameObject healthBar;
     public GameObject ubObject;
     public Player owner;
+
+    public enum UBType { stone, wood, infantry };
+    public UBType ubType;
+    public float melDefense = 1;
+    public float ranDefense = 1;
 
     public UnitBuilding(int maxHealth, Player owner)
     {
@@ -26,17 +31,17 @@ public abstract class UnitBuilding {
     public abstract void DeleteObject();
 
     //Health
-    public int getMaxHealth()
+    public float getMaxHealth()
     {
         return maxHealth;
     }
 
-    public int getHealth()
+    public float getHealth()
     {
         return health;
     }
 
-    public void takeDamage(int damage)
+    public void takeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)

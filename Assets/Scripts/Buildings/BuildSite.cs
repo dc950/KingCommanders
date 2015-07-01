@@ -31,6 +31,26 @@ public class BuildSite : Building {
             return;
         }
 
+        if(tile.unit != null)
+        {
+            Debug.Log("Cannot build: unit in the way!");
+            return;
+        }
+        else
+        {
+            foreach(Tile t in tile.neighbours.Values)
+            {
+                if(t.unit != null)
+                {
+                    if(t.unit.owner != owner)
+                    {
+                        Debug.Log("Cannot build! Enemy nearby!");
+                        return;
+                    }
+                }
+            }
+        }
+
         //Make sure no enemies are nearby or on this tile or something
 
         toBuild.Initialise();

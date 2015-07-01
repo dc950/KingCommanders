@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class SoldierChar : UnitChar {
 
-    SoldiersObj soldierObj;
+    //SoldiersObj soldierObj;
     bool movingToEnemy = false;
     
 
@@ -11,7 +11,7 @@ public class SoldierChar : UnitChar {
 	void Start () 
     {
         base.initialise();
-        soldierObj = (SoldiersObj) unitObj;
+        //soldierObj = (SoldiersObj) unitObj;
 	}
 
 	// Update is called once per frame
@@ -38,7 +38,7 @@ public class SoldierChar : UnitChar {
             return;
         }
         //At enemy
-        Debug.Log("Animation set to attacking");
+        //Debug.Log("Animation set to attacking");
         animator.SetBool("Attacking", true);
         movingToEnemy = false;
     }

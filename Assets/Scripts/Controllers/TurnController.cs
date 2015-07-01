@@ -109,7 +109,7 @@ public class TurnController : MonoBehaviour {
             //get monies
             foreach (Player p in players.Values)
             {
-                Debug.Log("End turn for player " + p.playerNumber);
+                //Debug.Log("End turn for player " + p.playerNumber);
                 p.turnEnd();
             }
 

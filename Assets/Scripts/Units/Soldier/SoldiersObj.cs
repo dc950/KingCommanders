@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
-public class SoldiersObj : UnitObj {
+public class SoldiersObj : UnitObj, IPointerClickHandler {
 
     
     public float curCooldown, cooldown;
@@ -110,7 +111,7 @@ public class SoldiersObj : UnitObj {
                             foreach(Tile t in soldier.path)
                             {
                                 s += "("+t.x+","+t.y+")"+", ";
-;                            }
+                            }
 
                             //Debug.Log("Path is " + s + " and curTile is "+ soldier.curTile);
                             return;
@@ -134,6 +135,7 @@ public class SoldiersObj : UnitObj {
             
 
             soldier.path.RemoveAt(0);
+            soldier.pathAction.RemoveAt(0);
             halfway = false;
             
             //Check if still need to move
@@ -164,7 +166,20 @@ public class SoldiersObj : UnitObj {
 
 
         //Debug.Log("Target: "+ soldier.path[1].x +","+soldier.path[1].y+"      Position: " + target.x + "," + target.y);
-        this.transform.position = Vector3.MoveTowards(transform.position, moveTarget, soldier.speed / 1000);
+
+        float speed = soldier.speed;
+
+         if(soldier.pathAction[1] == Unit.actions.run)
+         {
+             speed *= 2;
+             Debug.Log("running...");
+         }
+         else
+         {
+             Debug.Log("Walking...");
+         }
+
+        this.transform.position = Vector3.MoveTowards(transform.position, moveTarget, speed / 1000);
     }
 
 
@@ -190,18 +205,8 @@ public class SoldiersObj : UnitObj {
         }
     }
 
-
-   
-    void OnMouseDown()
+    public void OnPointerClick(PointerEventData eventData)
     {
         ObjectDictionary.getStateController().UnitClicked(soldier);
     }
-
-
-
-
-
-
-    
-
 }

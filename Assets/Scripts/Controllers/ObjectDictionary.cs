@@ -22,6 +22,10 @@ public class ObjectDictionary : MonoBehaviour {
     public List<BoxCollider> unitColliders;
 
 
+    //UIs
+    public GameObject ActionUI;
+
+
     public GameObject healthBar;
 
     public GameObject mainCamera;
@@ -41,7 +45,7 @@ public class ObjectDictionary : MonoBehaviour {
         buildingNames = new Dictionary<string,int>();
         //Setup BuildingNames/Costs
         buildingNames.Add("Wall", 20);
-        buildingNames.Add("Mine", 50);
+        buildingNames.Add("Mine", 40);
 
         unitNames = new Dictionary<string, int>();
         //Setup unitNames

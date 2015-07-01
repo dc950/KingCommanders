@@ -158,7 +158,7 @@ public class TileMap : MonoBehaviour
 
     public List<Tile> findPath(Tile source, Tile target)
     {
-        Debug.Log("Finding path");
+        //Debug.Log("Finding path");
 
         Dictionary<Tile, int> distance;
         Dictionary<Tile, Tile> previous;
@@ -225,14 +225,14 @@ public class TileMap : MonoBehaviour
         }
 
         path.Reverse();
-
+        /*
         string s = "";
-         foreach(Tile t in path)
+        foreach(Tile t in path)
         {
             s += "("+t.x+","+t.y+")"+", ";
         }
-        Debug.Log("Adding path: "+s);
-
+        //Debug.Log("Adding path: "+s);
+        */
 
         return path;
            

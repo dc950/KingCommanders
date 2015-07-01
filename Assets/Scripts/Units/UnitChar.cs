@@ -152,13 +152,13 @@ public abstract class UnitChar : MonoBehaviour {
 
     void startMoving()
     {
-        Debug.Log("Started Moving");
+        //Debug.Log("Started Moving");
         animator.SetBool("Walking", true);
     }
 
     void StopMoving()
     {
-        Debug.Log("Stoping movement");
+        //Debug.Log("Stoping movement");
         animator.SetBool("Walking", false);
     }
 

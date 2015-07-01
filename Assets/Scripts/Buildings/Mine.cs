@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Mine : Building {
 
-    public int value = 20;
+    public int value = 10;
 
     public Mine(Tile tile, Player owner) : base(500, tile, owner)
     {

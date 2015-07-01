@@ -9,8 +9,11 @@ public class StateController : MonoBehaviour {
     [SerializeField] GameObject btnStop;
     [SerializeField] GameObject btnRecruit;
     [SerializeField] GameObject pnlRecruit;
+
+    GameObject actionUI;
+
     //States
-    public enum states { Idle, Placing, Recruiting, Commanding, Attacking };
+    public enum states { Idle, Placing, Recruiting, Commanding, ActionCommanding, Attacking };
     public states state;
     TurnController tc;
     //Building stuff
@@ -53,32 +56,45 @@ public class StateController : MonoBehaviour {
 
     public void setState(states newState)
     {
-        state = newState;
+
+
+        if (state == states.ActionCommanding && newState != states.ActionCommanding)
+        {
+            Destroy(actionUI);
+            actionUI = null;
+        }
+
+
 
         if (newState == states.Placing)
         {
-            stateText.text = state + " " + bToPlace;
+            stateText.text = newState + " " + bToPlace;
             btnStop.SetActive(true);
         }
         else if (newState == states.Idle)
         {
-            stateText.text = state + "";
+            stateText.text = newState + "";
             btnStop.SetActive(false);
 
             ObjectDictionary.getDictionary().setColliders(true);
-
         }
         else if (newState == states.Recruiting)
         {
-            stateText.text = state + "";
+            stateText.text = newState + "";
             btnStop.SetActive(false);
         }
         else if (newState == states.Commanding)
         {
-            stateText.text = state + "";
+            stateText.text = newState + "";
             btnStop.SetActive(true);
             ObjectDictionary.getDictionary().setColliders(false);
         }
+        else if (newState == states.ActionCommanding)
+        {
+            stateText.text = newState + "";
+        }
+
+        state = newState;
     }
 
     //***************************
@@ -184,15 +200,34 @@ public class StateController : MonoBehaviour {
         }
     }
 
-    public void AddToPath(Tile tile)
+    public void TileClicked(Tile tile)
     {
+        actionUI = (GameObject)GameObject.Instantiate(ObjectDictionary.getDictionary().ActionUI, tile.getWorldCoords(), ObjectDictionary.getDictionary().mainCamera.transform.rotation);
+        actionUI.GetComponent<ActionUI>().Initialise(tile);
+
+        setState(states.ActionCommanding);
+    }
+
+    public void StopActionCommanding()
+    {
+        setState(states.Commanding);
+    }
+
+    public void AddToPath(Tile tile, Unit.actions action)
+    {
+        if(state == states.ActionCommanding)
+        {
+            setState(states.Commanding);
+        }
+
+
         if (unitCommanding == null)
         {
             Debug.Log("Error: unitCommadning = null");
             return;
         }
 
-        unitCommanding.AddToPath(tile);
+        unitCommanding.AddToPath(tile, action);
 
     }
 

@@ -42,8 +42,8 @@ public class HealthBar : MonoBehaviour {
     {
         setPos();
 
-        int health = unitBuilding.getHealth();
-        int maxHealth = unitBuilding.getMaxHealth();
+        float health = unitBuilding.getHealth();
+        float maxHealth = unitBuilding.getMaxHealth();
 
         float currentXValue = MapValues(health, 0, maxHealth, minXValue, maxXValue);
 

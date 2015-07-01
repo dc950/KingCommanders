@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
-public class ClickableTile : MonoBehaviour {
+public class ClickableTile : MonoBehaviour, IPointerClickHandler {
 
     public Tile tile;
     public StateController sc;
@@ -10,7 +11,7 @@ public class ClickableTile : MonoBehaviour {
         sc = ObjectDictionary.getStateController();
 	}
 
-    void OnMouseDown()
+    public void OnPointerClick(PointerEventData eventData)
     {
         //Debug.Log("Owned by player " + tile.owner);
 
@@ -18,9 +19,13 @@ public class ClickableTile : MonoBehaviour {
         {
             sc.BuildBuilding(tile);
         }
-        if (sc.state == StateController.states.Commanding)
+        else if (sc.state == StateController.states.Commanding)
         {
-            sc.AddToPath(tile);
+            sc.TileClicked(tile);
+        }
+        else if (sc.state == StateController.states.ActionCommanding)
+        {
+            sc.StopActionCommanding();
         }
     }
 }
