@@ -21,7 +21,7 @@ public class SoldiersObj : UnitObj, IPointerClickHandler {
 
 	// Update is called once per frame
 	void Update () {
-        base.Update();
+        base.DoUpdate();
 	}
 
     public override void attack()
@@ -172,12 +172,8 @@ public class SoldiersObj : UnitObj, IPointerClickHandler {
          if(soldier.pathAction[1] == Unit.actions.run)
          {
              speed *= 2;
-             Debug.Log("running...");
          }
-         else
-         {
-             Debug.Log("Walking...");
-         }
+
 
         this.transform.position = Vector3.MoveTowards(transform.position, moveTarget, speed / 1000);
     }

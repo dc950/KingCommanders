@@ -202,7 +202,10 @@ public class StateController : MonoBehaviour {
 
     public void TileClicked(Tile tile)
     {
-        actionUI = (GameObject)GameObject.Instantiate(ObjectDictionary.getDictionary().ActionUI, tile.getWorldCoords(), ObjectDictionary.getDictionary().mainCamera.transform.rotation);
+        Vector3 pos = tile.getWorldCoords();
+
+        pos = Vector3.MoveTowards(pos, ObjectDictionary.getDictionary().mainCamera.transform.position, 2);
+        actionUI = (GameObject)GameObject.Instantiate(ObjectDictionary.getDictionary().ActionUI, pos, ObjectDictionary.getDictionary().mainCamera.transform.rotation);
         actionUI.GetComponent<ActionUI>().Initialise(tile);
 
         setState(states.ActionCommanding);

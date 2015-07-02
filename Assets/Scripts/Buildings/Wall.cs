@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Wall : Building {
+public class Wall : WallCon {
 
     public Wall(Tile tile, Player owner) : base(3000, tile, owner)
     {
@@ -14,7 +14,7 @@ public class Wall : Building {
         PlaceObject(false);
     }
 
-	private void PlaceObject(bool updating)
+	protected override void PlaceObject(bool updating)
     {
         //bools say whether there is a wall in corresponding neighbour tile
         bool n, s, w, e;
@@ -221,18 +221,12 @@ public class Wall : Building {
             }
         }
 
-        displayHealthBar();
-    }
-
-    public void Update()
-    {
-        DeleteObject();
-        PlaceObject(true);
+        //displayHealthBar();
     }
 
     void UpdateNeighbour(string s)
     {
-        Wall w = (Wall) tile.neighbours[s].building;
+        WallCon w = (WallCon) tile.neighbours[s].building;
         w.Update();
     }
 

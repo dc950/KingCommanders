@@ -31,15 +31,17 @@ public class Soldier : Unit {
             damage *= stoneMod;
         }
         else if (target.ubType == UBType.wood)
+        {
+        }
 
         if (damage < 1)
         {
             damage = 1;
         }
 
-        if(Random.Range(0,100) >= 95)
+        if(Random.Range(0,100) <= critChance)
         {
-            damage *= 2;
+            damage *= critMod;
             Debug.Log("Critical hit!");
         }
 

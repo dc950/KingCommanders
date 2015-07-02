@@ -13,6 +13,11 @@ public class ObjectDictionary : MonoBehaviour {
     public GameObject wallSingle;
     public GameObject wallT;
     public GameObject wallCross;
+
+    //Towers
+    public GameObject tower;
+    public GameObject towerWall;
+
     public GameObject keep;
     public GameObject buildSite;
 
@@ -46,6 +51,7 @@ public class ObjectDictionary : MonoBehaviour {
         //Setup BuildingNames/Costs
         buildingNames.Add("Wall", 20);
         buildingNames.Add("Mine", 40);
+        buildingNames.Add("Tower", 80);
 
         unitNames = new Dictionary<string, int>();
         //Setup unitNames
@@ -100,6 +106,10 @@ public class ObjectDictionary : MonoBehaviour {
         else if(name == "Mine")
         {
             building = new Mine(tile, player);
+        }
+        else if(name == "Tower")
+        {
+            building = new Tower(tile, player);
         }
         else
         {

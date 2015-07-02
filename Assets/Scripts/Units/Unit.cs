@@ -14,7 +14,8 @@ public abstract class Unit : UnitBuilding {
     public float speed = 5;
     public float stoneMod = 1;
     public float infantryMod = 1;
-
+    public float critChance = 5;
+    public float critMod = 2;
 
 
     public Unit(int maxHealth, Tile tile, Player owner) : base(maxHealth, owner)
@@ -91,8 +92,39 @@ public abstract class Unit : UnitBuilding {
 
     public void RemoveFromPath(Tile targetTile)
     {
-        path.RemoveRange((path.IndexOf(targetTile) + 1), path.Count - path.IndexOf(targetTile) - 1);
+
+        int indexStart, indexEnd;
+
+        indexStart = path.IndexOf(targetTile) + 1;
+        indexEnd = path.Count - path.IndexOf(targetTile) - 1;
+
+        path.RemoveRange(indexStart, indexEnd);
+        pathAction.RemoveRange(indexStart, indexEnd);
+
+        //showList();
+
         return;
+    }
+
+    void showList()
+    {
+        string s = "";
+        foreach (Tile t in path)
+        {
+            s += ", (" + t.x + "," +t.y+")";
+        }
+        s = s.Remove(0, 2);
+        Debug.Log(s);
+        
+        s = "";
+        foreach(actions a in pathAction)
+        {
+            s += ", " + a;
+        }
+        s = s.Remove(0, 2);
+        Debug.Log(s);
+
+        Debug.Log("Length of path: " + path.Count + ", Length of pathAction: " + pathAction.Count);
     }
 
     public void AddToPath(Tile targetTile, actions action)
@@ -117,7 +149,9 @@ public abstract class Unit : UnitBuilding {
         {
             path.Add(targetTile);
             pathAction.Add(action);
-        }        
+        }
+
+        //showList();
     }
 
     public bool checkIfUnderAttack()

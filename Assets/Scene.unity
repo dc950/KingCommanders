@@ -496,6 +496,8 @@ MonoBehaviour:
   wallSingle: {fileID: 100000, guid: 4f142bcae42bdb045a1d859f3799373d, type: 3}
   wallT: {fileID: 100000, guid: ced5fd69aa1df2b448f5b805851b78d1, type: 3}
   wallCross: {fileID: 100000, guid: 9b001115ec261f94fbab232e15f223af, type: 3}
+  tower: {fileID: 155054, guid: c92341d84b6255b4f8dc647ed62f9a47, type: 2}
+  towerWall: {fileID: 100000, guid: f331641e447a83740948ae4d103a39cb, type: 3}
   keep: {fileID: 148438, guid: c3a50b6ab010a974d83854995d93488e, type: 2}
   buildSite: {fileID: 109474, guid: 572643833bec4d84b80a85ea3756340a, type: 2}
   soldier: {fileID: 175514, guid: 4b18dfabf006ddf4990b0214fa6654cb, type: 2}
@@ -516,7 +518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTurn: 0
   textTurn: {fileID: 131742992}
-  startingMoney: 100
+  startingMoney: 9000
   btnEndTurn: {fileID: 549183457}
   btnStartAttack: {fileID: 933354873}
   btnBuild: {fileID: 1592984643}
@@ -537,7 +539,7 @@ MonoBehaviour:
   btnRecruit: {fileID: 602378320}
   pnlRecruit: {fileID: 1367920721}
   state: 0
-  turnTime: 15
+  turnTime: 5
 --- !u!1 &549183457
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class SoldierChar : UnitChar {
 
 	// Update is called once per frame
 	void Update () {
-        base.Update();
+        base.DoUpdate();
 	}
 
     void moveToEnemy()

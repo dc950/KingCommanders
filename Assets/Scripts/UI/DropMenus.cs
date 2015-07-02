@@ -32,7 +32,7 @@ public class DropMenus : MonoBehaviour {
         //Fill recruit
         List<string> uNames = new List<string>();
         uNames.AddRange(ObjectDictionary.getDictionary().unitNames.Keys);
-        for (int i = 0; i < bNames.Count-1; i++)
+        for (int i = 0; i < uNames.Count; i++)
         {
             GameObject button = (GameObject)Instantiate(buttonPrefab);
             button.GetComponentInChildren<Text>().text = uNames[i];

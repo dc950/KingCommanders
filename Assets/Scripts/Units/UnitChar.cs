@@ -49,7 +49,7 @@ public abstract class UnitChar : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	protected void Update () {
+	protected void DoUpdate () {
         if (ObjectDictionary.getStateController().state == StateController.states.Attacking)
         {
             animator.enabled = true;

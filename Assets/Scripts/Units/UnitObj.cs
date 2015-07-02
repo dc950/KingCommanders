@@ -19,7 +19,7 @@ public abstract class UnitObj : MonoBehaviour {
 	void Start () {
         sc = ObjectDictionary.getStateController();
         ObjectDictionary.getDictionary().unitColliders.Add(GetComponent<BoxCollider>());
-        List<UnitChar> unitChars = new List<UnitChar>();
+        //List<UnitChar> unitChars = new List<UnitChar>();
 	}
 	
     protected void initialise()
@@ -28,7 +28,7 @@ public abstract class UnitObj : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	protected void Update () {
+	protected void DoUpdate () {
         if (sc.state == StateController.states.Attacking)  //attack in progress
         {
             //Debug.Log("Moving: " + moving);
