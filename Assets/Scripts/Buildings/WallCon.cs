@@ -11,7 +11,6 @@ public abstract class WallCon : Building {
 
     public void Update()
     {
-        DeleteObject();
         PlaceObject(true);
     }
 

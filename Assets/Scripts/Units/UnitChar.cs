@@ -15,6 +15,7 @@ public abstract class UnitChar : MonoBehaviour {
     protected Transform enemy;
 
     int number;
+    public bool dead = false;
 
     bool walking;
     bool attacking;
@@ -50,6 +51,10 @@ public abstract class UnitChar : MonoBehaviour {
 
 	// Update is called once per frame
 	protected void DoUpdate () {
+        if(dead)
+        {
+            return;
+        }
         if (ObjectDictionary.getStateController().state == StateController.states.Attacking)
         {
             animator.enabled = true;
@@ -73,7 +78,7 @@ public abstract class UnitChar : MonoBehaviour {
                     walking = false;
                     StopMoving();
                 }
-                animator.SetBool("Attacking", false);
+                animator.SetBool("Attack 01", false); //TODO: fancy battle sequence...
 
                 if (walking)
                 {
@@ -150,17 +155,8 @@ public abstract class UnitChar : MonoBehaviour {
         return unitObj.moving;
     }
 
-    void startMoving()
-    {
-        //Debug.Log("Started Moving");
-        animator.SetBool("Walking", true);
-    }
-
-    void StopMoving()
-    {
-        //Debug.Log("Stoping movement");
-        animator.SetBool("Walking", false);
-    }
+    protected abstract void startMoving();
+    protected abstract void StopMoving();
 
 
     protected void selectEnemy()
@@ -207,8 +203,10 @@ public abstract class UnitChar : MonoBehaviour {
     public void Destroy()
     {
         Debug.Log("Destroying");
+        Destroy(gameObject);
         Destroy(this);
     }
 
     protected abstract void targeted();
+    public abstract void Die();
 }

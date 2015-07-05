@@ -7,6 +7,7 @@ public class SoldiersObj : UnitObj, IPointerClickHandler {
     
     public float curCooldown, cooldown;
     public Soldier soldier;
+    public bool running = false;
     
     
     // Use this for initialization
@@ -171,11 +172,16 @@ public class SoldiersObj : UnitObj, IPointerClickHandler {
 
          if(soldier.pathAction[1] == Unit.actions.run)
          {
-             speed *= 2;
+             speed *= 3;
+             running = true;
+         }
+         else
+         {
+             running = false;
          }
 
 
-        this.transform.position = Vector3.MoveTowards(transform.position, moveTarget, speed / 1000);
+        this.transform.position = Vector3.MoveTowards(transform.position, moveTarget, speed / 3000);
     }
 
 

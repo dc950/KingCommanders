@@ -56,7 +56,7 @@ public abstract class UnitObj : MonoBehaviour {
             float health = (float)unit.getHealth();
             float maxHealth = (float)unit.getMaxHealth();
 
-            if ((health / maxHealth) * 100 < (unitChars.Count - 1) * 25)
+            if ((health / maxHealth) * 100 < (unitChars.Count - 1) * 25)//TODO sort this shit
             {
                  //Debug.Log("Health: " + health + ", MaxHealth " + maxHealth + ", HealthDiv: " + health / maxHealth + "Health pct: " + (health / maxHealth) * 100 + ", comp to" + (unitChars.Count - 1) * 25 + "Where unitcount -1 is" + (unitChars.Count - 1));
                 //choose random dude to destroy
@@ -64,8 +64,7 @@ public abstract class UnitObj : MonoBehaviour {
                 //Debug.Log("Going to destroy " + num);
                 UnitChar toDestroy = unitChars[num];
                 unitChars.Remove(toDestroy);
-                Destroy(toDestroy.gameObject);
-                Destroy(toDestroy);
+                toDestroy.Die();
             }
 
             //unit.ShowLine();
@@ -171,7 +170,5 @@ public abstract class UnitObj : MonoBehaviour {
 
     public abstract void attack();
     public abstract void move();
-
-
     
 }

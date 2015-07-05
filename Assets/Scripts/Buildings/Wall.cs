@@ -16,6 +16,12 @@ public class Wall : WallCon {
 
 	protected override void PlaceObject(bool updating)
     {
+        if(updating)
+        {
+            DeleteObject();
+        }
+
+
         //bools say whether there is a wall in corresponding neighbour tile
         bool n, s, w, e;
 
