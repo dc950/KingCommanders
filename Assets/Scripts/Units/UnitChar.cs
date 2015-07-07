@@ -8,7 +8,7 @@ public abstract class UnitChar : MonoBehaviour {
     float offset;
     protected Animator animator;
     protected UnitObj unitObj;
-
+    protected bool running = false;
     public string facing;
 
     protected float speed = 0.5f;
@@ -61,6 +61,9 @@ public abstract class UnitChar : MonoBehaviour {
 
             if (unitObj.target != null)
             {
+                walking = false;
+                StopMoving();
+
                 targeted();
             }
             else
@@ -78,7 +81,6 @@ public abstract class UnitChar : MonoBehaviour {
                     walking = false;
                     StopMoving();
                 }
-                animator.SetBool("Attack 01", false); //TODO: fancy battle sequence...
 
                 if (walking)
                 {

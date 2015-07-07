@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
-public abstract class UnitObj : MonoBehaviour {
+public abstract class UnitObj : MonoBehaviour, IPointerClickHandler
+{
 
     protected StateController sc;
 
     public Unit unit;
+
+    public bool running = false;
 
     public UnitBuilding target;
 
@@ -19,7 +23,6 @@ public abstract class UnitObj : MonoBehaviour {
 	void Start () {
         sc = ObjectDictionary.getStateController();
         ObjectDictionary.getDictionary().unitColliders.Add(GetComponent<BoxCollider>());
-        //List<UnitChar> unitChars = new List<UnitChar>();
 	}
 	
     protected void initialise()
@@ -136,10 +139,6 @@ public abstract class UnitObj : MonoBehaviour {
 
     protected bool CheckHalfway()
     {
-        //take away from smallest number
-        //divide by largest
-        //????
-
         float x, y;
 
         if (unit.path[0].getWorldCoords().x > unit.path[1].getWorldCoords().x)
@@ -169,6 +168,138 @@ public abstract class UnitObj : MonoBehaviour {
     }
 
     public abstract void attack();
-    public abstract void move();
-    
+    void move()
+    {
+        if (unit.checkIfUnderAttack()) //see if under attack
+        {
+            //Debug.Log("Under attack...");
+            target = unit.underAttack;
+            unit.underAttack = null;
+        }
+
+        //Check if need to move
+        if (unit.path.Count < 2)
+        {
+            //Debug.Log("Count < 2 (1)");
+            moving = false;
+            return;
+        }
+        else if (!moving)
+        {
+            moving = true;
+        }
+        //Check if at next tile
+        if (!halfway)
+        {
+            if (CheckHalfway() && unit.path.Count > 1)
+            {
+                Tile nextTile = unit.path[1];
+
+                //See if the next tile is free
+                if (nextTile.building != null || nextTile.unit != null)
+                {
+                    //Tile is not free: attack or stop - buildings are attacked first
+                    if (nextTile.building != null) //building
+                    {
+                        if (nextTile.building.owner != unit.owner)  //Enemy building
+                        {
+                            EnemyBuildingCollision(nextTile);
+                            return;
+                        }
+                        else //building is owned by player
+                        {
+
+                            //TODO: walk through building if possible, deppending on building type
+                        }
+                    }
+                    else //unit
+                    {
+                        if (nextTile.unit.owner != unit.owner) //Enemy unit collision
+                        {
+                            EnemyUnitCollision(nextTile);
+                            
+                            return;
+                        }
+                        else //Friendly unit in the way
+                        {
+                            return;
+                        }
+                    }
+                }
+
+                unit.curTile.unit = null;
+                unit.curTile = unit.path[1];
+                unit.curTile.unit = unit;
+                halfway = true;
+            }
+        }
+
+        if (atNextPosition())
+        {
+            unit.path.RemoveAt(0);
+            unit.pathAction.RemoveAt(0);
+            halfway = false;
+
+            //Check if still need to move
+            if (unit.path.Count < 2)
+            {
+                moving = false;
+                return;
+            }
+            else if (!moving)
+            {
+                moving = true;
+            }
+
+            findNewFacing();
+            setForward();
+        }
+
+        Vector3 moveTarget = new Vector3(0, 0, 0);
+
+
+        moveTarget.x = unit.path[1].getWorldCoords().x;
+        moveTarget.z = unit.path[1].getWorldCoords().z;
+
+        //transform.LookAt(moveTarget);
+
+
+        //Debug.Log("Target: "+ unit.path[1].x +","+unit.path[1].y+"      Position: " + target.x + "," + target.y);
+
+        float speed = unit.speed;
+
+        if (unit.pathAction[1] == Unit.actions.run)
+        {
+            speed *= 3;
+            running = true;
+        }
+        else
+        {
+            running = false;
+        }
+
+
+        this.transform.position = Vector3.MoveTowards(transform.position, moveTarget, speed / 3000);
+    }
+
+    bool atNextPosition()
+    {
+        if (transform.position.x == unit.path[1].getWorldCoords().x && transform.position.z == unit.path[1].getWorldCoords().z)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    public abstract void EnemyUnitCollision(Tile tile);
+    public abstract void EnemyBuildingCollision(Tile tile);
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        ObjectDictionary.getStateController().UnitClicked(unit);
+    }
 }

@@ -5,10 +5,9 @@ public class SoldierChar : UnitChar {
 
     //SoldiersObj soldierObj;
     bool movingToEnemy = false;
-    bool running = false;
     SoldiersObj soldierObj;
 
-    float deathTime = 2;
+    float deathTime = 5;
     
 
 	// Use this for initialization
@@ -41,7 +40,6 @@ public class SoldierChar : UnitChar {
             }
 
             deathTime -= Time.deltaTime;
-            Debug.Log("DeathTime: " + deathTime);
         }
 
 	}
@@ -59,13 +57,12 @@ public class SoldierChar : UnitChar {
 
         if(Vector3.Distance(transform.position, enemy.position) >= 0.1)
         {
-            //Debug.Log("not close enough! Distance = " + Vector3.Distance(transform.position, enemy.position));
             transform.position = Vector3.MoveTowards(transform.position, enemy.position, 2*speed*Time.deltaTime);
             transform.LookAt(enemy.position);
             return;
         }
+
         //At enemy
-        //Debug.Log("Animation set to attacking");
         animator.SetBool("Attack 01", true);
         movingToEnemy = false;
     }
@@ -91,6 +88,8 @@ public class SoldierChar : UnitChar {
 
     protected override void startMoving()
     {
+        animator.SetBool("Attack 01", false);
+
         if (soldierObj.running)
         {
             animator.SetBool("Walk", false);
@@ -111,7 +110,7 @@ public class SoldierChar : UnitChar {
 
     public override void Die()
     {
-        Debug.Log("Dying...");
+        this.transform.parent = null;
 
         animator.SetBool("Attack 01", false);
         animator.SetBool("Run", false);

@@ -23,6 +23,7 @@ public class ObjectDictionary : MonoBehaviour {
 
     //units
     public GameObject soldier;
+    public GameObject archer;
 
     public List<BoxCollider> unitColliders;
 
@@ -56,6 +57,7 @@ public class ObjectDictionary : MonoBehaviour {
         unitNames = new Dictionary<string, int>();
         //Setup unitNames
         unitNames.Add("Soldier", 40);
+        unitNames.Add("Archer", 40);
     }
 
     public static TurnController getTurnController()
@@ -145,6 +147,12 @@ public class ObjectDictionary : MonoBehaviour {
             soldier.Initialise();
             soldier.getObject().GetComponent<UnitObj>().unit = soldier;
             //Debug.Log(soldier.getObject().GetComponent<SoldiersObj>().soldier.getHealth());
+        }
+        if(name == "Archer")
+        {
+            Unit archer = new Archer(tile, player);
+            archer.Initialise();
+            archer.getObject().GetComponent<UnitObj>().unit = archer;
         }
     }
 
