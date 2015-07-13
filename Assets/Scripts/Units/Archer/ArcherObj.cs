@@ -35,6 +35,10 @@ public class ArcherObj : UnitObj {
     public override void attack()
     {
         //if target not in range, remove target
+        if (target.getHealth() <= 0)
+        {
+            target = null;
+        }
     }
 
     public override void EnemyUnitCollision(Tile tile)

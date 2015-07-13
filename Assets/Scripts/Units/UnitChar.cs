@@ -13,6 +13,7 @@ public abstract class UnitChar : MonoBehaviour {
 
     protected float speed = 0.5f;
     protected Transform enemy;
+    protected UnitChar curTarget;
 
     int number;
     public bool dead = false;
@@ -164,8 +165,11 @@ public abstract class UnitChar : MonoBehaviour {
     protected void selectEnemy()
     {
         //TODO: fix this!!!
-
-
+        if(unitObj.target == null)
+        {
+            return;
+        }
+        
         //If its a unit
         if (unitObj.target is Unit)
         {
@@ -176,22 +180,26 @@ public abstract class UnitChar : MonoBehaviour {
             {
                 if (enemies.unitChars.Count > number - 1) //there is one for this number
                 {
-                    enemy = enemies.unitChars[number].transform;
+                    curTarget = enemies.unitChars[number];
+                    enemy = curTarget.transform;
                 }
                 else //there isnt... go for highest
                 {
-                    enemy = enemies.unitChars[enemies.unitChars.Count - 1].transform;
+                    curTarget = enemies.unitChars[enemies.unitChars.Count - 1];
+                    enemy = curTarget.transform;
                 }
             }
             else
             {
                 if (enemies.unitChars.Count > number) //there is one for this number
                 {
-                    enemy = enemies.unitChars[enemies.unitChars.Count - 1 - number].transform;
+                    curTarget = enemies.unitChars[enemies.unitChars.Count - 1 - number];
+                    enemy = curTarget.transform;
                 }
                 else //there isnt... go for highest
                 {
-                    enemy = enemies.unitChars[enemies.unitChars.Count - 1].transform;
+                    curTarget = enemies.unitChars[enemies.unitChars.Count - 1];
+                    enemy = curTarget.transform;
                 }
             }
         }
@@ -200,11 +208,13 @@ public abstract class UnitChar : MonoBehaviour {
             enemy = unitObj.target.ubObject.transform;
         }
 
+        //Debug.Log("New enemy selected...");
+
     }
 
     public void Destroy()
     {
-        Debug.Log("Destroying");
+        //Debug.Log("Destroying");
         Destroy(gameObject);
         Destroy(this);
     }

@@ -8,6 +8,10 @@ public class Arrow : MonoBehaviour {
 
     float halfX, halfZ;
 
+    public bool damage = false;
+    public Archer archer;
+    public UnitBuilding targetUB;
+
     int numberOfPoints = 100;
     List<Vector3> points;
 
@@ -39,36 +43,45 @@ public class Arrow : MonoBehaviour {
             points.Add(nextPoint);
 
         }
-
-        string s = "";
-
-        foreach(Vector3 v in points)
-        {
-            s += "("+ v.x + "," + v.y + ","+ v.z +"), ";
-        }
-
-        Debug.Log(s);
     }
 	
 	// Update is called once per frame
 	void Update () {
         //DrawLine();
-        Move();
+        if (ObjectDictionary.getStateController().state == StateController.states.Attacking)
+        {
+            Move();
+        }
 	}
 
     void Move()
     {
+        if (points.Count <= 1)
+        {
+            if (damage)
+            {
+                DealDamage();
+            }
+
+            Destroy(this.gameObject);
+        }
+
         if(transform.position == points[0])
         {
             points.RemoveAt(0);
-            if(points.Count <= 1)
-            {
-                Destroy(this.gameObject);
-            }
+
         }
 
         transform.position = Vector3.MoveTowards(transform.position, points[0], Time.deltaTime * 2);
         transform.LookAt(points[0]);
+    }
+
+    void DealDamage()
+    {
+        if (targetUB != null)
+        {
+            archer.Attack(targetUB);
+        }
     }
 
     void DrawLine()

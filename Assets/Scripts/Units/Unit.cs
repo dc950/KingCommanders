@@ -38,12 +38,25 @@ public abstract class Unit : UnitBuilding {
 
     public override void DeleteObject()
     {
-        ObjectDictionary.getDictionary().unitColliders.Remove(ubObject.GetComponent<BoxCollider>());
-
+        Debug.Log("Deleting object...");
+        if (ubObject != null)
+        {
+            if (ubObject.GetComponent<BoxCollider>())
+            {
+                ObjectDictionary.getDictionary().unitColliders.Remove(ubObject.GetComponent<BoxCollider>());
+            }
+        }
         if(getHealth() <= 0)
         {
             //dead - destroy last unitchar...
-            ubObject.GetComponent<UnitObj>().unitChars[0].Die();
+            if(ubObject != null)
+            {
+                if(ubObject.GetComponent<UnitObj>().unitChars[0] != null)
+                {
+                    ubObject.GetComponent<UnitObj>().unitChars[0].Die();
+                }
+            }
+            
         }
 
         MonoBehaviour.Destroy(ubObject);

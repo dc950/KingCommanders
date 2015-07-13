@@ -42,17 +42,28 @@ public class ArcherChar : UnitChar {
 
             deathTime -= Time.deltaTime;
         }
-
-        if (enemy != null)
+        if (ObjectDictionary.getStateController().state == StateController.states.Attacking)
         {
-            if (attackTimer <= 0)
+            if (enemy != null)
             {
-                attackTimer = attackTimerMax;
-                Fire();
-            }
-            else
-            {
-                attackTimer -= Time.deltaTime;
+                if (curTarget != null)
+                {
+                    if (curTarget.dead)
+                    {
+                        selectEnemy();
+                        return;
+                    }
+                }
+                if (attackTimer <= 0)
+                {
+                    attackTimer = attackTimerMax;
+                    Fire();
+                }
+                else
+                {
+                    attackTimer -= Time.deltaTime;
+                }
+
             }
         }
 	}
@@ -95,9 +106,21 @@ public class ArcherChar : UnitChar {
 
     void Fire()
     {
+        if(dead)
+        {
+            return;
+        }
+
         GameObject firedArrowObj = (GameObject)Instantiate(arrow, transform.position, Quaternion.identity);
         Arrow firedArrow = firedArrowObj.GetComponent<Arrow>();
         firedArrow.end = enemy.position;
+
+        if (archerObj.unitChars[0] == this)
+        {
+            firedArrow.damage = true;
+            firedArrow.archer = (Archer) archerObj.unit;
+            firedArrow.targetUB = archerObj.target;
+        }
     }
 
     public override void Die()

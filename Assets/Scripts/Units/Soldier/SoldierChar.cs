@@ -28,6 +28,20 @@ public class SoldierChar : UnitChar {
             startMoving();
         }
 
+        if(ObjectDictionary.getStateController().state == StateController.states.Attacking && curTarget != null && soldierObj.target != null)
+        {
+            if(curTarget.dead)
+            {
+                Debug.Log("Target is dead...");
+                selectEnemy();
+                movingToEnemy = true;
+            }
+            else
+            {
+                transform.LookAt(enemy.position);
+            }
+        }
+
         if(dead)
         {
             if(deathTime <= 0)
@@ -118,7 +132,7 @@ public class SoldierChar : UnitChar {
         animator.SetBool("Die", true);
 
         dead = true;
-
+        Debug.Log("Dead...");
         unitObj.unitChars.Remove(this);
     }
 

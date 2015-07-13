@@ -42,7 +42,7 @@ public class Soldier : Unit {
         if(Random.Range(0,100) <= critChance)
         {
             damage *= critMod;
-            Debug.Log("Critical hit!");
+            //Debug.Log("Critical hit!");
         }
 
 

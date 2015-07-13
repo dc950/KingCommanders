@@ -20,7 +20,7 @@ public class Archer : Unit {
 
     public override void Attack(UnitBuilding target)
     {
-        float damage = (strength * (getHealth() / getMaxHealth())) * 10;
+        float damage = (strength * (getHealth() / getMaxHealth())) * 30;
 
         if (target.ubType == UBType.infantry)
         {
