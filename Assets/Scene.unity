@@ -540,7 +540,7 @@ MonoBehaviour:
   btnRecruit: {fileID: 602378320}
   pnlRecruit: {fileID: 1367920721}
   state: 0
-  turnTime: 30
+  turnTime: 10
 --- !u!1 &549183457
 GameObject:
   m_ObjectHideFlags: 0

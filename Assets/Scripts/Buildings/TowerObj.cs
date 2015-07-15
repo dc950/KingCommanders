@@ -8,6 +8,7 @@ public class TowerObj : MonoBehaviour {
     Tower tower;
 
     Unit target = null;
+    public GameObject arrow;
 
     void Start()
     {
@@ -18,6 +19,7 @@ public class TowerObj : MonoBehaviour {
     {
         this.tower = tower;
         cooldown = tower.rateOfFire;
+        Debug.Log("Tower initialised");
     }
 
     void Update()
@@ -64,7 +66,14 @@ public class TowerObj : MonoBehaviour {
 
                 if(cooldown < 0)
                 {
-                    tower.attack(target);
+                    Vector3 pos = transform.position;
+
+                    pos.y += 2.5f;
+
+                    GameObject go = (GameObject) Instantiate(arrow, pos, Quaternion.identity);
+                    TowerArrow ta = go.GetComponent<TowerArrow>();
+                    ta.tower = tower;
+                    ta.targetUB = target;
                     cooldown = tower.rateOfFire; 
                     //TODO: do the damage when the arrows hit.
                 }
