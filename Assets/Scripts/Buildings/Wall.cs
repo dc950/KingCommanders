@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Wall : WallCon {
 
     public Wall(Tile tile, Player owner) : base(3000, tile, owner)
     {
-
+        name = "Wall";
     }
 
     public override void PlaceObject()

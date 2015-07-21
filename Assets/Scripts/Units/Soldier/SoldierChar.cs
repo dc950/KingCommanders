@@ -32,7 +32,7 @@ public class SoldierChar : UnitChar {
         {
             if(curTarget.dead)
             {
-                Debug.Log("Target is dead...");
+                //Debug.Log("Target is dead...");
                 selectEnemy();
                 movingToEnemy = true;
             }
@@ -132,7 +132,7 @@ public class SoldierChar : UnitChar {
         animator.SetBool("Die", true);
 
         dead = true;
-        Debug.Log("Dead...");
+        //Debug.Log("Dead...");
         unitObj.unitChars.Remove(this);
     }
 

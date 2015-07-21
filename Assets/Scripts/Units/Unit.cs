@@ -38,7 +38,7 @@ public abstract class Unit : UnitBuilding {
 
     public override void DeleteObject()
     {
-        Debug.Log("Deleting object...");
+        //Debug.Log("Deleting object...");
         if (ubObject != null)
         {
             if (ubObject.GetComponent<BoxCollider>())

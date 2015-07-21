@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Tower : WallCon {
@@ -7,7 +7,7 @@ public class Tower : WallCon {
     public float rateOfFire = 1; //number off attacks per second
     public Tower(Tile tile, Player owner) : base(5000, tile, owner)
     {
-
+        name = "Tower";
     }
 
 

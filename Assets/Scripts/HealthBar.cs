@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -10,6 +10,8 @@ public class HealthBar : MonoBehaviour {
     private float minXValue, maxXValue;
     public UnitBuilding unitBuilding;
     public Image visualHealth;
+
+    public bool fixedUI = false;
 
 	// Use this for initialization
     void Start()
@@ -66,6 +68,12 @@ public class HealthBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        
+        if(fixedUI)
+        {
+            if (unitBuilding != null)
+            {
+                HandleHealth();
+            }
+        }
     }
 }

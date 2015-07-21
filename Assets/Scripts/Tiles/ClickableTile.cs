@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
 
@@ -26,6 +26,11 @@ public class ClickableTile : MonoBehaviour, IPointerClickHandler {
         else if (sc.state == StateController.states.ActionCommanding)
         {
             sc.StopActionCommanding();
+        }
+
+        if (sc.state != StateController.states.Commanding && sc.state != StateController.states.ActionCommanding)
+        {
+            ObjectDictionary.getDictionary().DeactivateFixedUI();
         }
     }
 }

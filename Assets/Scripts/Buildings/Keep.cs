@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Keep : Spawner {
@@ -6,6 +6,7 @@ public class Keep : Spawner {
     public Keep (Tile tile, Player owner) : base(10000, tile, owner)
     {
         setSpawnTile();
+        name = "Keep";
     }
 	
 	public void spawnUnit(Unit unit)

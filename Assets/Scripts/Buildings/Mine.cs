@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Mine : Building {
@@ -8,6 +8,7 @@ public class Mine : Building {
     public Mine(Tile tile, Player owner) : base(500, tile, owner)
     {
         owner.mines.Add(this);
+        name = "Mine";
     }
 
     public int getMoney()

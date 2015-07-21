@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -8,6 +8,7 @@ public abstract class UnitBuilding {
     GameObject healthBar;
     public GameObject ubObject;
     public Player owner;
+    protected string name;
 
     public enum UBType { stone, wood, infantry };
     public UBType ubType;
@@ -82,5 +83,10 @@ public abstract class UnitBuilding {
 
         updateHealthBar();
 
+    }
+
+    public string GetName()
+    {
+        return name;
     }
 }

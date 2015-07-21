@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Soldier : Unit {
@@ -8,6 +8,7 @@ public class Soldier : Unit {
 	public Soldier(Tile tile, Player owner) : base(1000, tile, owner)
     {
         ubType = UBType.infantry;
+        name = "Soldier";
     }
 
     public override void PlaceObjects()

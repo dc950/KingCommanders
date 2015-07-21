@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Archer : Unit {
@@ -9,6 +9,7 @@ public class Archer : Unit {
     public Archer(Tile tile, Player owner) :base(500, tile, owner)
     {
         ubType = UBType.infantry;
+        name = "Archer";
     }
 
 

@@ -108,7 +108,7 @@ public class TileMap : MonoBehaviour
 		//set values like this or wierd rounding errors occur
 		x = mapSizeX-1;
 		x = x/2;
-		y = -2;
+		y = -3;
 		
 		mainCamera.transform.position = new Vector3(x, 10, y);
 		

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
@@ -138,6 +138,11 @@ public class TurnController : MonoBehaviour {
 
     public Player getCurrentPlayer()
     {
+        if (currentTurn >= 3)
+        {
+            Debug.Log("There is no current Turn...");
+            return null;
+        }
         return getPlayer(currentTurn);
     }
 }

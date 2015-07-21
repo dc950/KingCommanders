@@ -1,27 +1,24 @@
-CORE MECHANICS
-	TURNS
-		Basic turn method.
-		Money.
-		Attack state.
-		Hide previous players move?
-	COMMANDING
-		Block walls etc.
-	ATTACKING
-		Movement.
-		Assign specific coords.
-		Health.
-		Avoid collisions with other units.
-Art   
+Short Term
+	
+	Click on unit UI
+		Design UI
+		show camera zoomed in on it
+
+	Overwatch for Archer
+	Catapults
 					
 Tidying
+	Make arrows better
 	Store UnitBuildings each player has - remove hacky buildsite build() and hide().                                                                                                                                                 
 
 
 
 Mid Term
-	Animation
+	"Real"  path display (with direction blob?)
 	More units
 	Balancing
+	Placement hologram thing
+	Camera control
 
 Long term
 	AI

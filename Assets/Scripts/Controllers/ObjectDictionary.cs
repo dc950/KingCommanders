@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class ObjectDictionary : MonoBehaviour {
@@ -30,11 +30,13 @@ public class ObjectDictionary : MonoBehaviour {
 
     //UIs
     public GameObject ActionUI;
+    public GameObject FixedUIImage;
 
 
     public GameObject healthBar;
 
     public GameObject mainCamera;
+    public GameObject followCamera;
 
 
     public Dictionary<string, int> buildingNames;
@@ -179,4 +181,30 @@ public class ObjectDictionary : MonoBehaviour {
             bc.enabled = state;
         }
     }
+
+    public void ActivateFixedUI(UnitBuilding target)
+    {
+        //set things active
+        followCamera.SetActive(true);
+        FixedUIImage.SetActive(true);
+        FixedUIImage.GetComponent<FixedUI>().Activate(target);
+
+        //activate new camera target
+        followCamera.GetComponent<CameraFollow>().Activate(target.ubObject.transform);
+    }
+
+    public void DeactivateFixedUI()
+    {
+        //Deactivate Follow Camera
+        followCamera.GetComponent<CameraFollow>().Deactivate();
+
+        //set things not active
+        followCamera.SetActive(false);
+        FixedUIImage.SetActive(false);
+
+
+    }
+
+
+
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -193,11 +193,24 @@ public class StateController : MonoBehaviour {
     //A valid Unit has been clicked on: enter Commanding mode
     public void UnitClicked(Unit unit)
     {
+        //TODO: Make a "UnitBuildingClicked" class that calls this method if type is unit - following code goes into that class for selecting unit:
+        if (state != states.Commanding)
+        {
+            ObjectDictionary.getDictionary().ActivateFixedUI(unit);
+        }
+
+
+        //This stays here anyway
         if (unit.owner == tc.getCurrentPlayer())
         {
             setState(states.Commanding);
             unitCommanding = unit;
         }
+
+
+        
+
+
     }
 
     public void TileClicked(Tile tile)
