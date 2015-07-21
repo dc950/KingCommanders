@@ -47,6 +47,11 @@ public abstract class UnitBuilding {
         health -= damage;
         if (health <= 0)
         {
+            if(ubObject.transform.Find("FollowCamera"))
+            {
+                ubObject.transform.Find("FollowCamera").SetParent(null);
+                ObjectDictionary.getDictionary().DeactivateFixedUI();
+            }
             Destroy(); 
         }
 

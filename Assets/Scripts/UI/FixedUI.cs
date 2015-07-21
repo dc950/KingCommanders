@@ -22,6 +22,10 @@ public class FixedUI : MonoBehaviour
     {
         if(active)
         {
+            if(target == null)
+            {
+                Deactivate();
+            }
             health.text = target.getHealth() + "/" + target.getMaxHealth();
         }
     }
@@ -29,7 +33,7 @@ public class FixedUI : MonoBehaviour
     public void Activate(UnitBuilding target)
     {
         this.gameObject.SetActive(true);
-        this.GetComponentInChildren<HealthBar>().Initialise(target);
+        this.GetComponentInChildren<HealthBarFixed>().Initialise(target);
         this.target = target;
         active = true;
         name.text = target.GetName();

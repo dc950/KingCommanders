@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Soldier : Unit {
 
-    public float strength = 3;
+    public float strength = 20;
 
-	public Soldier(Tile tile, Player owner) : base(1000, tile, owner)
+	public Soldier(Tile tile, Player owner) : base(100, tile, owner)
     {
         ubType = UBType.infantry;
         name = "Soldier";
@@ -35,9 +35,9 @@ public class Soldier : Unit {
         {
         }
 
-        if (damage < 1)
+        if (damage < 5)
         {
-            damage = 1;
+            damage = 5;
         }
 
         if(Random.Range(0,100) <= critChance)
@@ -49,6 +49,6 @@ public class Soldier : Unit {
 
 
         //Debug.Log("Player " + owner.playerNumber + " giving damage: " + damage);
-        target.takeDamage((int)damage);
+        target.takeDamage((int)damage*Time.deltaTime);
     }
 }

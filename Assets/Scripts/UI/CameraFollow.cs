@@ -52,7 +52,7 @@ public class CameraFollow : MonoBehaviour
     void Rotate()
     {
         transform.LookAt(target);
-        transform.Translate((Vector3.right / 2) * Time.deltaTime);
+        transform.Translate((Vector3.right / 10) * Time.deltaTime);
     }
 
     void GetIntoPosition()

@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour {
+public class HealthBarFixed : MonoBehaviour
+{
 
     public RectTransform healthTransform;
     public RectTransform backgroundTransform;
@@ -11,18 +12,17 @@ public class HealthBar : MonoBehaviour {
     public UnitBuilding unitBuilding;
     public Image visualHealth;
 
-    public bool fixedUI = false;
-
-	// Use this for initialization
+    // Use this for initialization
     void Start()
     {
-       //Ran into problems using this... not beign called first and stuff...
+        //Ran into problems using this... not beign called first and stuff...
     }
 
     public void Initialise(UnitBuilding ub)
     {
         unitBuilding = ub;
         HandleHealth();
+        setPos();
     }
 
     private float MapValues(float x, float inMin, float inMax, float outMin, float outMax)
@@ -33,30 +33,28 @@ public class HealthBar : MonoBehaviour {
 
     private void setPos()
     {
-        cachedY = backgroundTransform.position.y;
-        cachedZ = backgroundTransform.position.z;
+        cachedY = backgroundTransform.localPosition.y;
+        cachedZ = backgroundTransform.localPosition.z;
 
-        maxXValue = backgroundTransform.position.x;
-        minXValue = backgroundTransform.position.x - backgroundTransform.rect.width;
+        maxXValue = backgroundTransform.localPosition.x;
+        minXValue = backgroundTransform.localPosition.x - backgroundTransform.rect.width;
 
     }
-	
+
     public void HandleHealth()
     {
-        setPos();
 
         float health = unitBuilding.getHealth();
         float maxHealth = unitBuilding.getMaxHealth();
 
         float currentXValue = MapValues(health, 0, maxHealth, minXValue, maxXValue);
-        if (fixedUI)
-            Debug.Log("currX: " + currentXValue+", MinX: "+minXValue+", maxX: "+maxXValue+", health: "+health+"/"+ maxHealth);
-        Vector3 pos = new Vector3(currentXValue, cachedY, cachedZ);
-        healthTransform.position = pos;
 
-        if(unitBuilding.getHealth() > unitBuilding.getMaxHealth()/2)
+        Vector3 pos = new Vector3(currentXValue, cachedY, cachedZ);
+        healthTransform.localPosition = pos;
+
+        if (unitBuilding.getHealth() > unitBuilding.getMaxHealth() / 2)
         {
-            visualHealth.color = new Color32((byte)MapValues(health, maxHealth/2,maxHealth, 255, 0), 255, 0, 255);
+            visualHealth.color = new Color32((byte)MapValues(health, maxHealth / 2, maxHealth, 255, 0), 255, 0, 255);
         }
         else
         {
@@ -67,15 +65,12 @@ public class HealthBar : MonoBehaviour {
 
 
 
-	// Update is called once per frame
-	void Update () {
-
-        if(fixedUI)
+    // Update is called once per frame
+    void Update()
+    {
+        if (unitBuilding != null)
         {
-            if (unitBuilding != null)
-            {
-                HandleHealth();
-            }
+            HandleHealth();
         }
     }
 }

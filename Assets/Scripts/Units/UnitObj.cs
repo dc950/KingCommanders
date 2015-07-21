@@ -279,7 +279,7 @@ public abstract class UnitObj : MonoBehaviour, IPointerClickHandler
         }
 
 
-        this.transform.position = Vector3.MoveTowards(transform.position, moveTarget, speed / 3000);
+        this.transform.position = Vector3.MoveTowards(transform.position, moveTarget, (speed/25)*Time.deltaTime);
     }
 
     bool atNextPosition()
