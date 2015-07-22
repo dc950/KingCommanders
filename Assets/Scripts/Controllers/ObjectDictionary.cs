@@ -189,8 +189,12 @@ public class ObjectDictionary : MonoBehaviour {
         FixedUIImage.SetActive(true);
         FixedUIImage.GetComponent<FixedUI>().Activate(target);
 
+        bool far = false;
         //activate new camera target
-        followCamera.GetComponent<CameraFollow>().Activate(target.ubObject.transform);
+        if (target is Building)
+            far = true;
+
+        followCamera.GetComponent<CameraFollow>().Activate(target.ubObject.transform, far);
     }
 
     public void DeactivateFixedUI()

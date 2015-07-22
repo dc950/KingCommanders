@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Keep : Spawner {
 
-    public Keep (Tile tile, Player owner) : base(10000, tile, owner)
+    public Keep (Tile tile, Player owner) : base(1000, tile, owner)
     {
         setSpawnTile();
         name = "Keep";
@@ -29,7 +29,7 @@ public class Keep : Spawner {
         Vector3 angle = new Vector3(0, angleNo, 0);
         ubObject = (GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().keep, tile.getWorldCoords(), Quaternion.Euler(angle));
 
-        ubObject.GetComponent<KeepObj>().keep = this;
+        ubObject.GetComponent<KeepObj>().Initialize(this);
     }
 
 	void setSpawnTile()

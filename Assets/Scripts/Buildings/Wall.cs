@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Wall : WallCon {
 
-    public Wall(Tile tile, Player owner) : base(3000, tile, owner)
+    public Wall(Tile tile, Player owner) : base(200, tile, owner)
     {
         name = "Wall";
     }
@@ -12,6 +12,7 @@ public class Wall : WallCon {
     {
         wallConnect = true;
         PlaceObject(false);
+        
     }
 
 	protected override void PlaceObject(bool updating)
@@ -20,7 +21,6 @@ public class Wall : WallCon {
         {
             DeleteObject();
         }
-
 
         //bools say whether there is a wall in corresponding neighbour tile
         bool n, s, w, e;
@@ -226,6 +226,8 @@ public class Wall : WallCon {
                 UpdateNeighbour("E");
             }
         }
+
+        ubObject.GetComponent<BuildingObj>().Initialize(this);
 
         //displayHealthBar();
     }

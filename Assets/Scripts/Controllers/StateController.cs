@@ -190,27 +190,29 @@ public class StateController : MonoBehaviour {
     //Commanding Units
     //***************************
 
-    //A valid Unit has been clicked on: enter Commanding mode
-    public void UnitClicked(Unit unit)
+
+    public void UnitBuildingClicked(UnitBuilding ub)
     {
-        //TODO: Make a "UnitBuildingClicked" class that calls this method if type is unit - following code goes into that class for selecting unit:
         if (state != states.Commanding)
         {
-            ObjectDictionary.getDictionary().ActivateFixedUI(unit);
+            ObjectDictionary.getDictionary().ActivateFixedUI(ub);
+        }
+        if(ub is Unit)
+        {
+            UnitClicked((Unit)ub);
         }
 
+    }
 
+    //A valid Unit has been clicked on: enter Commanding mode
+    void UnitClicked(Unit unit)
+    {
         //This stays here anyway
         if (unit.owner == tc.getCurrentPlayer())
         {
             setState(states.Commanding);
             unitCommanding = unit;
         }
-
-
-        
-
-
     }
 
     public void TileClicked(Tile tile)

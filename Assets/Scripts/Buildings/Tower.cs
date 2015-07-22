@@ -5,7 +5,7 @@ public class Tower : WallCon {
 
     public float damage = 100; //damage per attack
     public float rateOfFire = 1; //number off attacks per second
-    public Tower(Tile tile, Player owner) : base(5000, tile, owner)
+    public Tower(Tile tile, Player owner) : base(400, tile, owner)
     {
         name = "Tower";
     }

@@ -300,6 +300,6 @@ public abstract class UnitObj : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        ObjectDictionary.getStateController().UnitClicked(unit);
+        ObjectDictionary.getStateController().UnitBuildingClicked(unit);
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public abstract class Building : UnitBuilding{
@@ -33,6 +33,17 @@ public abstract class Building : UnitBuilding{
 
     public override void DeleteObject()
     {
+        if(ubObject != null)
+        {
+            if(ubObject.GetComponent<BoxCollider>())
+            {
+                if (ObjectDictionary.getDictionary().unitColliders.Contains(ubObject.GetComponent<BoxCollider>()))
+                {
+                    ObjectDictionary.getDictionary().unitColliders.Remove(ubObject.GetComponent<BoxCollider>());
+                }
+                
+            }
+        }
         Object.Destroy(ubObject);
         ubObject = null;
     }

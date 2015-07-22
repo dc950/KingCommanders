@@ -6,13 +6,15 @@ public class CameraFollow : MonoBehaviour
 
     private Transform target;
     private bool active;
+    private bool far;
 
-    Vector3 StartPos;
+    Vector3 StartPosClose, StartPosFar;
 
     // Use this for initialization
     void Start()
     {
-        StartPos = new Vector3(0, 0.25f, -1);
+        StartPosClose = new Vector3(0, 0.25f, -1);
+        StartPosFar = new Vector3(0, 2, 4);
     }
 
     // Update is called once per frame
@@ -31,10 +33,11 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    public void Activate(Transform target)
+    public void Activate(Transform target, bool far)
     {
         active = true;
         this.target = target;
+        this.far = far;
         GetIntoPosition();
     }
 
@@ -58,7 +61,10 @@ public class CameraFollow : MonoBehaviour
     void GetIntoPosition()
     {
         transform.SetParent(target);
-        transform.localPosition = StartPos;
+        if (!far)
+            transform.localPosition = StartPosClose;
+        else
+            transform.localPosition = StartPosFar;
     }
 
 }
