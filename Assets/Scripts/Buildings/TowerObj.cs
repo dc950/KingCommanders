@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
-public class TowerObj : MonoBehaviour {
+public class TowerObj : BuildingObj {
 
 
     float cooldown;
@@ -20,6 +20,7 @@ public class TowerObj : MonoBehaviour {
         this.tower = tower;
         cooldown = tower.rateOfFire;
         Debug.Log("Tower initialised");
+        base.Initialize(tower);
     }
 
     void Update()

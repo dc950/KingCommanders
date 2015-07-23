@@ -12,6 +12,7 @@ GameObject:
   - 23: {fileID: 2345150}
   - 95: {fileID: 9507208}
   - 114: {fileID: 11458138}
+  - 65: {fileID: 6537424}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155054}
   m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106709}
-  m_LocalPosition: {x: 2.07280827, y: -1.399261, z: -.803814888}
+  m_LocalPosition: {x: 101.367012, y: 84.4185944, z: -199.86702}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,6 +63,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155054}
   m_Mesh: {fileID: 4300000, guid: 581ccf993e1b42e4f87587c9f31b0890, type: 3}
+--- !u!65 &6537424
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155054}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: .999999881, z: 2.53691578}
+  m_Center: {x: 0, y: 0, z: 1.26845789}
 --- !u!95 &9507208
 Animator:
   serializedVersion: 3

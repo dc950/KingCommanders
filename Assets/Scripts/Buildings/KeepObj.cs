@@ -11,14 +11,14 @@ public class KeepObj : BuildingObj, IPointerClickHandler
 	// Use this for initialization
 	void Start () {
         sc = ObjectDictionary.getStateController();
-        ObjectDictionary.getDictionary().unitColliders.Add(GetComponent<BoxCollider>());
+        
 	}
 
 
     public void Initialize(Keep keep)
     {
         this.keep = keep;
-        building = keep;
+        base.Initialize(keep);
     }
 	
 	// Update is called once per frame
