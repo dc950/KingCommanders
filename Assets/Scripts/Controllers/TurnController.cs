@@ -9,6 +9,7 @@ public class TurnController : MonoBehaviour {
     public Dictionary<int, Player> players;
     public Text textTurn;
     [SerializeField] int startingMoney;
+    public List<Unit> newUnits;
 
     //UI
     [SerializeField] GameObject btnEndTurn;
@@ -21,6 +22,7 @@ public class TurnController : MonoBehaviour {
     {
         //set turn to player 1
         currentTurn = 1;
+        newUnits = new List<Unit>();
     }
 
     public void SetupPlayers()
@@ -59,6 +61,8 @@ public class TurnController : MonoBehaviour {
 
     public void NextTurn()
     {
+        ObjectDictionary.getDictionary().DeactivateFixedUI();
+
         if(ObjectDictionary.getStateController().state != StateController.states.Idle)
         {
             return;
@@ -73,6 +77,10 @@ public class TurnController : MonoBehaviour {
                 if(go.GetComponent<BuildSiteObj>().buildSite.owner == getCurrentPlayer())
                     go.GetComponent<BuildSiteObj>().buildSite.hide();
             }
+            foreach (Unit newUnit in newUnits)
+            {
+                newUnit.hide();
+            }
 
             currentTurn = 2;
 
@@ -85,6 +93,10 @@ public class TurnController : MonoBehaviour {
             {
                 if(go.GetComponent<BuildSiteObj>().buildSite.owner == getCurrentPlayer())
                     go.GetComponent<BuildSiteObj>().buildSite.hide();
+            }
+            foreach (Unit newUnit in newUnits)
+            {
+                newUnit.hide();
             }
 
             currentTurn = 3;
@@ -103,6 +115,13 @@ public class TurnController : MonoBehaviour {
             {
                 go.GetComponent<BuildSiteObj>().buildSite.show();
             }
+            foreach (Unit newUnit in newUnits)
+            {
+                newUnit.show();
+                //newUnits.Remove(newUnit);
+            }
+
+            newUnits = new List<Unit>();
 
             btnStartAttack.SetActive(false);
 

@@ -13,6 +13,10 @@ public class BuildingObj : MonoBehaviour, IPointerClickHandler
 
     }
 
+    public Building GetBuilding()
+    {
+        return building;
+    }
     public void Initialize(Building building)
     {
         this.building = building;

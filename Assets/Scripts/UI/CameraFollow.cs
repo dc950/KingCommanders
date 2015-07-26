@@ -35,6 +35,15 @@ public class CameraFollow : MonoBehaviour
 
     public void Activate(Transform target, bool far)
     {
+        //If already on current taraget, return so camera is not reset
+        if(this.target != null)
+        {
+            if(target == this.target)
+            {
+                return;
+            }
+        }
+
         active = true;
         this.target = target;
         this.far = far;

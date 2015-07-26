@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 public abstract class Unit : UnitBuilding {
@@ -26,6 +26,9 @@ public abstract class Unit : UnitBuilding {
         pathAction = new List<actions>();
         path.Add(curTile);
         pathAction.Add(actions.walk);
+
+        ObjectDictionary.getTurnController().newUnits.Add(this);
+
     }
 
     public void Initialise()
@@ -177,6 +180,18 @@ public abstract class Unit : UnitBuilding {
     public bool checkIfUnderAttack()
     {
         return underAttack != null;
+    }
+
+
+    //Hide and show methods for right after spawning - will not work if not exactly on tile
+    public void hide()
+    {
+        ubObject.transform.position = new Vector3(0, 0, -100);
+    }
+    public void show()
+    {
+        Vector3 coords =  curTile.getWorldCoords();
+        ubObject.transform.position = coords;
     }
 
 }

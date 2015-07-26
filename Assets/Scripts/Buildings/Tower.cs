@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class Tower : WallCon {
-
-    public float damage = 100; //damage per attack
+public class Tower : WallCon 
+{
+    public float damage = 10; //damage per attack
     public float rateOfFire = 1; //number off attacks per second
     public Tower(Tile tile, Player owner) : base(400, tile, owner)
     {

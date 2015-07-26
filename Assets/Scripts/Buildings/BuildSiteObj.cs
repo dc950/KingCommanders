@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BuildSiteObj : MonoBehaviour {
+public class BuildSiteObj : BuildingObj {
 
     public BuildSite buildSite;
-
 }
