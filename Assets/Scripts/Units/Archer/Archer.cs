@@ -5,8 +5,9 @@ public class Archer : Unit {
 
 
     public float strength = 3;
+    public int range = 3;
 
-    public Archer(Tile tile, Player owner) :base(500, tile, owner)
+    public Archer(Tile tile, Player owner) :base(70, tile, owner)
     {
         ubType = UBType.infantry;
         name = "Archer";
@@ -21,7 +22,7 @@ public class Archer : Unit {
 
     public override void Attack(UnitBuilding target)
     {
-        float damage = (strength * (getHealth() / getMaxHealth())) * 30;
+        float damage = (strength * (getHealth() / getMaxHealth())) * 5;
 
         if (target.ubType == UBType.infantry)
         {

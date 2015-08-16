@@ -8,7 +8,7 @@ public abstract class Unit : UnitBuilding {
     public List<actions> pathAction;
     public Unit underAttack;
 
-    public enum actions { walk, run};
+    public enum actions {walk, run, overwatch};
 
     //Combat modifiers
     public float speed = 5;

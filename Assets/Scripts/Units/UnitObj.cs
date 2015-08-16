@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
@@ -49,6 +49,12 @@ public abstract class UnitObj : MonoBehaviour, IPointerClickHandler
             {
                 attack();
                 moving = false;
+            }
+            else if (unit.pathAction[1] == Unit.actions.overwatch)
+            {
+                moving = false;
+                ArcherObj a = (ArcherObj)this;
+                a.overwatch = true;
             }
             else
             {
