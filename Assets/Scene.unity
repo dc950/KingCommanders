@@ -739,6 +739,7 @@ MonoBehaviour:
   healthBar: {fileID: 115520, guid: 3a5216f2a375eeb438233e59c0157691, type: 2}
   mainCamera: {fileID: 1589108539}
   followCamera: {fileID: 359789819}
+  line: {fileID: 112478, guid: cf73a48adc88c9a469e2c791aa976caa, type: 2}
 --- !u!114 &377171738
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,12 +1,12 @@
 Short Term
-	Overwatch for Archer
+	
 	Catapults
 					
 Tidying
-	Make arrows better
-	Store UnitBuildings each player has - remove hacky buildsite build() and hide().                                                                                                                                                 
-
-
+	improve Overwatch for Archer
+	Make arrows better and shooting them slower
+	Store UnitBuildings each player has - remove hacky buildsite build() and hide().   
+	Do something about destroying walls                                                                                                                                              
 
 Mid Term
 	"Real"  path display (with direction blob?)

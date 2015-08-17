@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public abstract class UnitChar : MonoBehaviour {
@@ -167,6 +167,7 @@ public abstract class UnitChar : MonoBehaviour {
         //TODO: fix this!!!
         if(unitObj.target == null)
         {
+            enemy = null;
             return;
         }
         

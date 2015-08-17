@@ -17,6 +17,12 @@ public abstract class Unit : UnitBuilding {
     public float critChance = 5;
     public float critMod = 2;
 
+    public GameObject line;
+    LineRenderer lineRend;
+    List<GameObject> lines;
+    bool pathDisplayed = false;
+
+
 
     public Unit(int maxHealth, Tile tile, Player owner) : base(maxHealth, owner)
     {
@@ -28,12 +34,15 @@ public abstract class Unit : UnitBuilding {
         pathAction.Add(actions.walk);
 
         ObjectDictionary.getTurnController().newUnits.Add(this);
+        lines = new List<GameObject>();
 
     }
 
     public void Initialise()
     {
         PlaceObjects();
+        line = ObjectDictionary.getDictionary().line;
+        lineRend = line.GetComponent<LineRenderer>();
     }
 
     public abstract void PlaceObjects();
@@ -41,7 +50,7 @@ public abstract class Unit : UnitBuilding {
 
     public override void DeleteObject()
     {
-        //Debug.Log("Deleting object...");
+        Debug.Log("Deleting object...");
         if (ubObject != null)
         {
             if (ubObject.GetComponent<BoxCollider>())
@@ -73,9 +82,62 @@ public abstract class Unit : UnitBuilding {
 
     public abstract void Attack(UnitBuilding target);
 
+    public void displayLine()
+    {
+        pathDisplayed = true;
+
+        for (int i = 0; i < path.Count-1; i++)
+        {
+            GameObject curLine = (GameObject) MonoBehaviour.Instantiate(line, path[i].getWorldCoords(), Quaternion.identity);
+            lines.Add(curLine);
+
+
+            LineRenderer lr = curLine.GetComponent<LineRenderer>();
+
+            lr.SetPosition(0, path[i].getWorldCoords());
+            lr.SetPosition(1, path[i + 1].getWorldCoords());
+
+            Color color;
+
+            if (pathAction[i+1] == actions.walk)
+                color = Color.red;
+            else if (pathAction[i+1] == actions.run)
+                color = Color.green;
+            else
+                color = Color.grey;
+
+            lr.SetColors(color, color);
+
+        }
+    }
+    public void hideLine()
+    {
+        pathDisplayed = false;
+
+        foreach(GameObject go in lines)
+        {
+            MonoBehaviour.Destroy(go);
+            //lines.Remove(go);
+            
+        }
+    }
 
     public void ShowLine()
     {
+        /*
+        lineRend.SetVertexCount(path.Count);
+        for(int i = 0; i < path.Count; i++)
+        {
+            lineRend.SetPosition(i, path[i].getWorldCoords());
+        } */
+
+        
+       if(!pathDisplayed)
+           displayLine();
+        
+
+
+        
         if (path != null)
         {
             if (path.Count != 0)
@@ -98,6 +160,7 @@ public abstract class Unit : UnitBuilding {
                         color = Color.grey;
 
                     Debug.DrawLine(start, end, color);
+
                     currentTile = nextTile;
                     nextTile++;
                 }
@@ -105,12 +168,10 @@ public abstract class Unit : UnitBuilding {
         }
     }
 
-    void Update()
+    void RefreshLine()
     {
-        if (ObjectDictionary.getStateController().state == StateController.states.Attacking)
-        {
-            ShowLine();
-        }
+        hideLine();
+        displayLine();
     }
 
     public void RemoveFromPath(Tile targetTile)
@@ -125,8 +186,7 @@ public abstract class Unit : UnitBuilding {
         pathAction.RemoveRange(indexStart, indexEnd);
 
         //showList();
-
-        return;
+        RefreshLine();
     }
 
     void showList()
@@ -175,6 +235,7 @@ public abstract class Unit : UnitBuilding {
         }
 
         //showList();
+        RefreshLine();
     }
 
     public bool checkIfUnderAttack()

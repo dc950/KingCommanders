@@ -50,11 +50,19 @@ public abstract class UnitObj : MonoBehaviour, IPointerClickHandler
                 attack();
                 moving = false;
             }
-            else if (unit.pathAction[1] == Unit.actions.overwatch)
+            else if (unit.pathAction.Count > 1)
             {
-                moving = false;
-                ArcherObj a = (ArcherObj)this;
-                a.overwatch = true;
+                if (unit.pathAction[1] == Unit.actions.overwatch)
+                {
+                    moving = false;
+                    ArcherObj a = (ArcherObj)this;
+                    a.overwatch = true;
+                }
+                else
+                {
+                    moving = true;
+                    move();
+                }
             }
             else
             {

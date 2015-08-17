@@ -79,7 +79,7 @@ public class ArcherObj : UnitObj {
         {
             s += "("+t.x+","+t.y+"), ";
         }
-        Debug.Log("Tiles: "+s);
+        //Debug.Log("Tiles: "+s);
         foreach(Tile t in tiles)
         {
             if(t.unit != null)

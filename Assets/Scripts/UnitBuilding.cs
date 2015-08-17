@@ -52,6 +52,7 @@ public abstract class UnitBuilding {
                 ubObject.transform.Find("FollowCamera").SetParent(null);
                 ObjectDictionary.getDictionary().DeactivateFixedUI();
             }
+
             Destroy(); 
         }
 

@@ -38,6 +38,7 @@ public class ObjectDictionary : MonoBehaviour {
     public GameObject mainCamera;
     public GameObject followCamera;
 
+    public GameObject line;
 
     public Dictionary<string, int> buildingNames;
     public Dictionary<string, int> unitNames;

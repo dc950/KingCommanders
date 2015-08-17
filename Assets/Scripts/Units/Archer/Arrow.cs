@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class Arrow : MonoBehaviour {
@@ -80,7 +80,10 @@ public class Arrow : MonoBehaviour {
     {
         if (targetUB != null)
         {
-            archer.Attack(targetUB);
+            if (targetUB.ubObject != null)
+            {
+                archer.Attack(targetUB);
+            }
         }
     }
 

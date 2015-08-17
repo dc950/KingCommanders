@@ -44,14 +44,14 @@ public class ActionButtonMover : MonoBehaviour
         float x = transform.localPosition.x;
         float y = transform.localPosition.y;
 
-        x += (target.x - x) * 0.1f;
-        y += (target.y - y) * 0.1f;
+        x += (target.x - x) * 0.1f * 100 * Time.deltaTime;
+        y += (target.y - y) * 0.1f * 100 * Time.deltaTime;
 
         transform.localPosition = new Vector3(x,y,0);
 
         if (c.a < 1)
         {
-            c.a += (1 - c.a) * 0.15f;
+            c.a += (1 - c.a) * 0.15f * 100 * Time.deltaTime;
             image.color = c;
         }
         
