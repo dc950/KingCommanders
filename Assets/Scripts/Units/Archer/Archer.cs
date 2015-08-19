@@ -11,6 +11,11 @@ public class Archer : Unit {
     {
         ubType = UBType.infantry;
         name = "Archer";
+
+        infantryMod = 1.5f;
+        stoneMod = 0.25f;
+        woodMod = 0.5f;
+
     }
 
 
@@ -34,6 +39,7 @@ public class Archer : Unit {
         }
         else if (target.ubType == UBType.wood)
         {
+            damage *= woodMod;
         }
 
         if (damage < 1)

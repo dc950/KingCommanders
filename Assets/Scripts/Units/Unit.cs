@@ -8,12 +8,13 @@ public abstract class Unit : UnitBuilding {
     public List<actions> pathAction;
     public Unit underAttack;
 
-    public enum actions {walk, run, overwatch};
+    public enum actions {walk, run, overwatch, catapult};
 
     //Combat modifiers
     public float speed = 5;
     public float stoneMod = 1;
     public float infantryMod = 1;
+    public float woodMod = 1;
     public float critChance = 5;
     public float critMod = 2;
 
@@ -21,8 +22,6 @@ public abstract class Unit : UnitBuilding {
     LineRenderer lineRend;
     List<GameObject> lines;
     bool pathDisplayed = false;
-
-
 
     public Unit(int maxHealth, Tile tile, Player owner) : base(maxHealth, owner)
     {

@@ -8,7 +8,7 @@ public class ActionUI : MonoBehaviour {
     StateController sc;
     Tile tile;
     Unit unit;
-    public GameObject btnWalk, btnRun, btnCancel, btnOverwatch, btnOverwatchCancel;
+    public GameObject btnWalk, btnRun, btnCancel, btnOverwatch, btnOverwatchCancel, btnCatapult;
     List<GameObject> btnList;
 
    
@@ -62,7 +62,15 @@ public class ActionUI : MonoBehaviour {
         else
         {
             btnList.Add(btnWalk);
-            btnList.Add(btnRun);
+            if (!(unit is Catapult))
+            {
+                btnList.Add(btnRun);
+            }
+            else
+            {
+                //TODO: range and shit
+                btnList.Add(btnCatapult);
+            }
 
             //display cancel
             if (unit.path.Contains(tile) && unit.path.Count > 1 && tile != unit.path[unit.path.Count - 1])
@@ -116,6 +124,11 @@ public class ActionUI : MonoBehaviour {
     {
         sc.unitCommanding.RemoveFromPath(sc.unitCommanding.path[sc.unitCommanding.path.Count-2]);
         sc.setState(StateController.states.Commanding);
+    }
+
+    public void Catapult()
+    {
+        sc.AddToPath(tile, Unit.actions.catapult);
     }
 
 

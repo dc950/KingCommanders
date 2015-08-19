@@ -4364,6 +4364,8 @@ MonoBehaviour:
   moving: 0
   facingAngle: 
   unitChars: []
+  numberOfChars: 4
+  overwatch: 0
   arrow: {fileID: 124882, guid: 589b9180bf138df4d80366dc05967a70, type: 2}
 --- !u!137 &13715108
 SkinnedMeshRenderer:
@@ -4757,6 +4759,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: unitChars.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -4764,6 +4770,10 @@ Prefab:
       propertyPath: arrow
       value: 
       objectReference: {fileID: 124882, guid: 589b9180bf138df4d80366dc05967a70, type: 2}
+    - target: {fileID: 0}
+      propertyPath: numberOfChars
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 150214}

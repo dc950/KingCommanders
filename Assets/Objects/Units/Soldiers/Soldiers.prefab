@@ -4111,6 +4111,7 @@ MonoBehaviour:
   moving: 0
   facingAngle: 
   unitChars: []
+  numberOfChars: 4
   curCooldown: 0
   cooldown: 0
 --- !u!114 &11455490
@@ -4404,6 +4405,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: numberOfChars
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

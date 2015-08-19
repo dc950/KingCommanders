@@ -18,6 +18,7 @@ public abstract class UnitObj : MonoBehaviour, IPointerClickHandler
     public string facingAngle;
 
     public List<UnitChar> unitChars;
+    public int numberOfChars;
 
 	// Use this for initialization
 	void Start () {
@@ -58,6 +59,12 @@ public abstract class UnitObj : MonoBehaviour, IPointerClickHandler
                     ArcherObj a = (ArcherObj)this;
                     a.overwatch = true;
                 }
+                else if(unit.pathAction[1] == Unit.actions.catapult)
+                {
+                    moving = false;
+                    CatapultObj c = (CatapultObj)this;
+                    c.tileTarget = unit.path[1];
+                }
                 else
                 {
                     moving = true;
@@ -73,7 +80,7 @@ public abstract class UnitObj : MonoBehaviour, IPointerClickHandler
             float health = (float)unit.getHealth();
             float maxHealth = (float)unit.getMaxHealth();
 
-            if ((health / maxHealth) * 100 < (unitChars.Count - 1) * 25)//TODO sort this shit
+            if ((health / maxHealth) * 100 < (unitChars.Count - 1) * (100/numberOfChars))//TODO sort this shit
             {
                  //Debug.Log("Health: " + health + ", MaxHealth " + maxHealth + ", HealthDiv: " + health / maxHealth + "Health pct: " + (health / maxHealth) * 100 + ", comp to" + (unitChars.Count - 1) * 25 + "Where unitcount -1 is" + (unitChars.Count - 1));
                 //choose random dude to destroy

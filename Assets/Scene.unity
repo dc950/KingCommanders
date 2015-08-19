@@ -733,6 +733,7 @@ MonoBehaviour:
   buildSite: {fileID: 109474, guid: 572643833bec4d84b80a85ea3756340a, type: 2}
   soldier: {fileID: 175514, guid: 4b18dfabf006ddf4990b0214fa6654cb, type: 2}
   archer: {fileID: 150214, guid: 8a9dfd75667f8684fa69c7c54b045f20, type: 2}
+  catapult: {fileID: 159704, guid: fd1ba0c2a14781845acf34ed1dfb3291, type: 2}
   unitColliders: []
   ActionUI: {fileID: 121256, guid: a6b18c57e94ab6f4a926922d7d38bdaf, type: 2}
   FixedUIImage: {fileID: 1477845728}
@@ -1291,7 +1292,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22492722, guid: 3a5216f2a375eeb438233e59c0157691, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 22492722, guid: 3a5216f2a375eeb438233e59c0157691, type: 2}
       propertyPath: m_AnchoredPosition.x

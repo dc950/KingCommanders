@@ -24,6 +24,7 @@ public class ObjectDictionary : MonoBehaviour {
     //units
     public GameObject soldier;
     public GameObject archer;
+    public GameObject catapult;
 
     public List<BoxCollider> unitColliders;
 
@@ -50,7 +51,6 @@ public class ObjectDictionary : MonoBehaviour {
 
     public void setUpNames()
     {
-
         buildingNames = new Dictionary<string,int>();
         //Setup BuildingNames/Costs
         buildingNames.Add("Wall", 20);
@@ -61,6 +61,7 @@ public class ObjectDictionary : MonoBehaviour {
         //Setup unitNames
         unitNames.Add("Soldier", 40);
         unitNames.Add("Archer", 40);
+        unitNames.Add("Catapult", 80);
     }
 
     public static TurnController getTurnController()
@@ -156,6 +157,12 @@ public class ObjectDictionary : MonoBehaviour {
             Unit archer = new Archer(tile, player);
             archer.Initialise();
             archer.getObject().GetComponent<UnitObj>().unit = archer;
+        }
+        if(name == "Catapult")
+        {
+            Unit catapult = new Catapult(tile, player);
+            catapult.Initialise();
+            catapult.getObject().GetComponent<UnitObj>().unit = catapult;
         }
     }
 

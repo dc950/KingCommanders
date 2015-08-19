@@ -19,8 +19,6 @@ public class Soldier : Unit {
             
     public override void Attack(UnitBuilding target)
     {
-
-
         float damage = strength * (getHealth() / getMaxHealth());
 
         if (target.ubType == UBType.infantry)
@@ -33,6 +31,7 @@ public class Soldier : Unit {
         }
         else if (target.ubType == UBType.wood)
         {
+            damage *= woodMod;
         }
 
         if (damage < 5)
