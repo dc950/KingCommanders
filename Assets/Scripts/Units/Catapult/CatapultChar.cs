@@ -6,12 +6,16 @@ public class CatapultChar : UnitChar {
     CatapultObj catapultObj;
     bool loaded = false;
     bool firing = false;
+    bool fired = false;
     float maxCooldown = 3;
     float cooldown, loadTime;
     float maxLoadTime = 3;
     float maxFireWait = 0.25f;
     float maxFireTime = 3;
     float fireWait, fireTime;
+
+    Vector3 rockSpawn;
+    GameObject rock;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +24,10 @@ public class CatapultChar : UnitChar {
         loadTime = maxLoadTime;
         fireWait = maxFireWait;
         fireTime = maxFireTime;
+
+        rock = catapultObj.rock;
+
+        rockSpawn = new Vector3(0, 0.39f, 0);
 	}
 	
 	// Update is called once per frame
@@ -62,6 +70,11 @@ public class CatapultChar : UnitChar {
                             fireTime -= Time.deltaTime;
                             
                         }
+                        else if(fireTime <= 0.1f && !fired)
+                        {
+                            spawnRock();
+                            fired = true;
+                        }
                         else if(fireTime <= 0)
                         {
                             stopFire();
@@ -70,6 +83,7 @@ public class CatapultChar : UnitChar {
                             loadTime = maxLoadTime;
                             fireWait = maxFireWait;
                             fireTime = maxFireTime;
+                            fired = false;
                         }
                         else
                         {
@@ -86,6 +100,15 @@ public class CatapultChar : UnitChar {
 
 	
 	}
+
+    private void spawnRock()
+    {
+        Vector3 pos = transform.position + rockSpawn;
+        GameObject go = (GameObject)Instantiate(rock, pos, Quaternion.identity);
+        go.GetComponent<Rock>().targetTile = catapultObj.tileTarget;
+        go.GetComponent<Rock>().catapult = catapultObj.catapult;
+        Debug.Log("Rock spawned...");
+    }
 
     protected override void startMoving()
     {

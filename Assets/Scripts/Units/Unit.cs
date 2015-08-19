@@ -217,7 +217,7 @@ public abstract class Unit : UnitBuilding {
             
         }
 
-        if (!path[path.Count - 1].neighbours.ContainsValue(targetTile))
+        if (!path[path.Count - 1].neighbours.ContainsValue(targetTile) && (action == actions.run || action == actions.walk))
         {
             List<Tile> newPath = ObjectDictionary.getTileMap().findPath(path[path.Count-1], targetTile);
             for (int i = 0; i < newPath.Count; i++ )

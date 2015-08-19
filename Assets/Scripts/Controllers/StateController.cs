@@ -158,8 +158,11 @@ public class StateController : MonoBehaviour {
     {
         setState(states.Idle);
         bToPlace = null;
-        unitCommanding.hideLine();
-        unitCommanding = null;
+        if (unitCommanding != null)
+        {
+            unitCommanding.hideLine();
+            unitCommanding = null;
+        }
     }
 
     //***************************

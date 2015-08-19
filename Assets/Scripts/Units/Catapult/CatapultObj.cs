@@ -4,7 +4,7 @@ using System.Collections;
 public class CatapultObj : UnitObj {
 
     public GameObject rock;
-    Catapult catapult;
+    public Catapult catapult;
 
     public Tile tileTarget;
 

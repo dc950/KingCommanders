@@ -11,6 +11,8 @@ public class Catapult : Unit {
         ubType = UBType.wood;
         name = "Catapult";
 
+        speed = 20;
+
         stoneMod = 4;
         woodMod = 5;
         infantryMod = 0.5f;
