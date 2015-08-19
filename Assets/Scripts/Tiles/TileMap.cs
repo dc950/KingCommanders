@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class TileMap : MonoBehaviour 
@@ -110,7 +110,10 @@ public class TileMap : MonoBehaviour
 		x = x/2;
 		y = -3;
 		
-		mainCamera.transform.position = new Vector3(x, 10, y);
+		
+        mainCamera.GetComponent<CameraControls>().cameraBoom.transform.position = new Vector3(x, 1, mapSizeY / 2);
+        mainCamera.transform.position = new Vector3(x, 10, y);
+
 		
 	}
 

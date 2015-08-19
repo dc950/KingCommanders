@@ -1,20 +1,21 @@
 Short Term
-	
-	Catapults
-					
-Tidying
-	improve Overwatch for Archer
-	Make arrows better and shooting them slower
-	Store UnitBuildings each player has - remove hacky buildsite build() and hide().   
-	Do something about destroying walls                                                                                                                                              
+	Camera Controls
+	Upgrade System
+	Tiletypes and modifiers                                                                                                                                           
 
 Mid Term
-	"Real"  path display (with direction blob?)
-	More units
-	Balancing
+	Better  path display (with direction blob?)
+	More buildings
+		- Barracks
+		- Gatehouse
 	Placement hologram thing
-	Camera control
 
 Long term
 	AI
 	Online
+
+Improvements
+	improve Overwatch for Archer
+	Make arrows better and shooting them slower (and actually hit!)
+	Store UnitBuildings each player has - remove hacky buildsite build() and hide().   
+	Do something about destroying walls   

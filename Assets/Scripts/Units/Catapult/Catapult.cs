@@ -26,7 +26,7 @@ public class Catapult : Unit {
 
     public override void Attack(UnitBuilding target)
     {
-        float damage = (strength * (getHealth() / getMaxHealth())) * 5;
+        float damage = (strength * (getHealth() / getMaxHealth())) * 25;
 
         if (target.ubType == UBType.infantry)
         {
