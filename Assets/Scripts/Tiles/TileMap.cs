@@ -109,9 +109,15 @@ public class TileMap : MonoBehaviour
 		x = mapSizeX-1;
 		x = x/2;
 		y = -3;
-		
-		
-        mainCamera.GetComponent<CameraControls>().cameraBoom.transform.position = new Vector3(x, 1, mapSizeY / 2);
+
+        CameraControls cc = mainCamera.GetComponent<CameraControls>();
+        cc.cameraBoom.transform.position = new Vector3(x, 1, mapSizeY / 2);
+        cc.maxLeft = 0;
+        cc.maxRight = mapSizeX - 1;
+        cc.maxDown = 0;
+        cc.maxUp = mapSizeY - 1;
+
+
         mainCamera.transform.position = new Vector3(x, 10, y);
 
 		

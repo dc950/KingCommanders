@@ -11,36 +11,42 @@ public class ActionUI : MonoBehaviour {
     public GameObject btnWalk, btnRun, btnCancel, btnOverwatch, btnOverwatchCancel, btnCatapult;
     List<GameObject> btnList;
 
-   
+    GameObject camera;
+    CameraControls cc;
 
+    Vector3 initialScale;
+    public float objectScale = 0.1f;
 
     float animTime = 0.1f;
 
 	// Use this for initialization
 	void Start () {
+        camera = ObjectDictionary.getDictionary().mainCamera;
+        cc = camera.GetComponent<CameraControls>();
 
-        
-
-        
+        initialScale = transform.localScale;
+        Plane plane = new Plane(camera.transform.forward, camera.transform.position);
+        float dist = plane.GetDistanceToPoint(transform.position);
+        transform.localScale = initialScale * dist * objectScale; 
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        /*
-	    if(animTime > 0 && btnList != null)
-        {
-            foreach (GameObject btn in btnList)
-            {
-                Vector3 center = new Vector3(0, 0, 0);
-                Vector3 dif = btn.transform.localPosition - Vector3.MoveTowards(btn.transform.localPosition, center, 200f * Time.deltaTime);
-                btn.transform.localPosition += dif;
-            }
+    void Update()
+    {
+        //rotate
+        transform.rotation = ObjectDictionary.getDictionary().mainCamera.transform.rotation;
+        //Scale
+        //transform.localScale = new Vector3(cc.zoomScale, cc.zoomScale, cc.zoomScale);
 
-            animTime -= Time.deltaTime;
-        }
-         * */
-	}
+        Plane plane = new Plane(camera.transform.forward, camera.transform.position);
+        float dist = plane.GetDistanceToPoint(transform.position);
+        transform.localScale = initialScale * dist * objectScale;
 
+        //Reposition
+        Vector3 tPos = tile.getWorldCoords();
+        Vector3 cPos = ObjectDictionary.getDictionary().mainCamera.transform.position;
+        transform.position = Vector3.MoveTowards(cPos, tPos, Vector3.Distance(cPos, tPos) /2 );
+    }
     public void Initialise(Tile tile)
     {
         //get buttons to be in selection

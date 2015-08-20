@@ -1,5 +1,4 @@
 Short Term
-	Camera Controls
 	Upgrade System
 	Tiletypes and modifiers                                                                                                                                           
 
@@ -18,4 +17,6 @@ Improvements
 	improve Overwatch for Archer
 	Make arrows better and shooting them slower (and actually hit!)
 	Store UnitBuildings each player has - remove hacky buildsite build() and hide().   
-	Do something about destroying walls   
+	Do something better about destroying walls  
+	Smooth out Camera Controls 
+	Fighting system

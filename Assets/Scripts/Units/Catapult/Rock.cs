@@ -19,15 +19,18 @@ public class Rock : MonoBehaviour
     public List<GameObject> rocks;
     GameObject go;
 
-    float velocity = 7;
+    public float velocity = 10;
 
     // Use this for initialization
     void Start()
     {
 
+        
+
         start = transform.position;
 
         points = new List<Vector3>();
+        SetVelocity();
         PlaceObject();
         SetTrajectory();
 
@@ -36,6 +39,35 @@ public class Rock : MonoBehaviour
 
     }
 
+
+    void SetVelocity()
+    {
+        float d = Vector3.Distance(transform.position, end);
+        
+        if(d < 2)
+        {
+            velocity = 3;
+        }
+        else if (d < 3)
+        {
+            velocity = 5;
+        }
+        else if (d<4)
+        {
+            velocity = 7;
+        }
+        else if(d < 5)
+        {
+            velocity = 9;
+        }
+        else
+        {
+            velocity = 10;
+        }
+
+        Debug.Log("Velocity is " + velocity);
+
+    }
     void SetTrajectory()
     {
         transform.LookAt(end);
@@ -54,7 +86,7 @@ public class Rock : MonoBehaviour
         float x = velocity * Mathf.Cos(angle);
         float y = velocity * Mathf.Sin(angle);
 
-        Debug.Log("Force x " + x + "Force y: " + y);
+        Debug.Log("Force x " + x + ", Force y: " + y);
 
         Vector3 force = new Vector3(x, y, 0);
 
@@ -88,8 +120,9 @@ public class Rock : MonoBehaviour
     {
         if(AtPosition())
         {
-            Debug.Log("At position");
+            //Debug.Log("At position");
             DealDamage();
+            Destroy(gameObject);
             Destroy(this);
         }
     }
@@ -147,7 +180,7 @@ public class Rock : MonoBehaviour
         //g is gravity
         float g = -Physics.gravity.y;
 
-        Debug.Log("v: " + v + ", y: " + y + ", x: " + x + ", g: " + g);
+        //Debug.Log("v: " + v + ", y: " + y + ", x: " + x + ", g: " + g);
 
         float root = (v*v*v*v) - (g * ((g*x*x)+(2*y*v*v)));
 
@@ -162,11 +195,11 @@ public class Rock : MonoBehaviour
         float atanP = ((v * v) + sqrt) / (g * x);
         float atanN = ((v * v) - sqrt) / (g * x);
 
-        Debug.Log("Atan+: "+atanP+", atanN: "+atanN);
+        //Debug.Log("Atan+: "+atanP+", atanN: "+atanN);
         float posAngle = Mathf.Atan(atanP);
         float negAngle = Mathf.Atan(atanN);
 
-        Debug.Log("OrigRoot: "+root+"Root: "+sqrt+ ", Pos: " + posAngle + ", Neg: " + negAngle);
+        //Debug.Log("OrigRoot: "+root+"Root: "+sqrt+ ", Pos: " + posAngle + ", Neg: " + negAngle);
 
         Debug.Log("Pos Angle is " + posAngle * Mathf.Rad2Deg+", neg angle is"+negAngle * Mathf.Rad2Deg);
 

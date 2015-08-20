@@ -107,19 +107,19 @@ public class CatapultChar : UnitChar {
         GameObject go = (GameObject)Instantiate(rock, pos, Quaternion.identity);
         go.GetComponent<Rock>().targetTile = catapultObj.tileTarget;
         go.GetComponent<Rock>().catapult = catapultObj.catapult;
-        Debug.Log("Rock spawned...");
+        //Debug.Log("Rock spawned...");
     }
 
     protected override void startMoving()
     {
         animator.SetBool("Move", true);
-        Debug.Log("Moving true");
+        //Debug.Log("Moving true");
     }
 
     protected override void StopMoving()
     {
         animator.SetBool("Move", false);
-        Debug.Log("Moving false");
+        //Debug.Log("Moving false");
     }
 
     protected override void targeted()
@@ -136,26 +136,26 @@ public class CatapultChar : UnitChar {
 
     void load()
     {
-        Debug.Log("Loading");
+        //Debug.Log("Loading");
         animator.SetBool("Load", true);
         //animator.SetBool("Load", false);
     }
 
     void stopLoad()
     {
-        Debug.Log("Stopping Load");
+        //Debug.Log("Stopping Load");
         animator.SetBool("Load", false);
     }
 
     void fire()
     {
-        Debug.Log("Firing");
+        //Debug.Log("Firing");
         animator.SetBool("Fire", true);
     }
 
     void stopFire()
     {
-        Debug.Log("Stopping firing");
+        //Debug.Log("Stopping firing");
         animator.SetBool("Fire", false);
     }
 

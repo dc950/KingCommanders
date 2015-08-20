@@ -13,9 +13,22 @@ public class HealthBar : MonoBehaviour {
 
     public bool fixedUI = false;
 
+    GameObject camera;
+
+    Vector3 initialScale;
+    public float objectScale = 0.1f;
+
 	// Use this for initialization
     void Start()
     {
+        if (!fixedUI)
+        {
+            camera = ObjectDictionary.getDictionary().mainCamera;
+            initialScale = transform.localScale;
+            Plane plane = new Plane(camera.transform.forward, camera.transform.position);
+            float dist = plane.GetDistanceToPoint(transform.position);
+            transform.localScale = initialScale * dist * objectScale;
+        }
        //Ran into problems using this... not beign called first and stuff...
     }
 
@@ -33,11 +46,11 @@ public class HealthBar : MonoBehaviour {
 
     private void setPos()
     {
-        cachedY = backgroundTransform.position.y;
-        cachedZ = backgroundTransform.position.z;
+        cachedY = backgroundTransform.localPosition.y;
+        cachedZ = backgroundTransform.localPosition.z;
 
-        maxXValue = backgroundTransform.position.x;
-        minXValue = backgroundTransform.position.x - backgroundTransform.rect.width;
+        maxXValue = backgroundTransform.localPosition.x;
+        minXValue = backgroundTransform.localPosition.x - backgroundTransform.rect.width;
 
     }
 	
@@ -52,7 +65,7 @@ public class HealthBar : MonoBehaviour {
         if (fixedUI)
             Debug.Log("currX: " + currentXValue+", MinX: "+minXValue+", maxX: "+maxXValue+", health: "+health+"/"+ maxHealth);
         Vector3 pos = new Vector3(currentXValue, cachedY, cachedZ);
-        healthTransform.position = pos;
+        healthTransform.localPosition = pos;
 
         if(unitBuilding.getHealth() > unitBuilding.getMaxHealth()/2)
         {
@@ -77,5 +90,18 @@ public class HealthBar : MonoBehaviour {
                 HandleHealth();
             }
         }
+
+        if (!fixedUI)
+        {
+            //rotate
+            transform.rotation = ObjectDictionary.getDictionary().mainCamera.transform.rotation;
+            //Scale
+            //transform.localScale = new Vector3(cc.zoomScale, cc.zoomScale, cc.zoomScale);
+
+            Plane plane = new Plane(camera.transform.forward, camera.transform.position);
+            float dist = plane.GetDistanceToPoint(transform.position);
+            transform.localScale = initialScale * dist * objectScale;
+        }
+        
     }
 }

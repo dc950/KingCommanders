@@ -82,7 +82,9 @@ public abstract class UnitBuilding {
     {
         Quaternion rot = ObjectDictionary.getDictionary().mainCamera.transform.rotation;
 
-        healthBar = ((GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().healthBar, ubObject.transform.position, rot));
+        Vector3 pos = ubObject.transform.position + new Vector3(0, 0.35f, 0);
+
+        healthBar = ((GameObject)MonoBehaviour.Instantiate(ObjectDictionary.getDictionary().healthBar, pos, rot));
         
         healthBar.GetComponent<HealthBar>().Initialise(this);
         healthBar.transform.SetParent(getObject().transform);

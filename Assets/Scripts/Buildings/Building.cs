@@ -29,6 +29,22 @@ public abstract class Building : UnitBuilding{
     {
         DeleteObject();
         tile.building = null;
+
+        if(wallConnect)
+        {
+            foreach(Tile t in tile.neighbours.Values)
+            {
+                if(t.building != null)
+                {
+                    if(t.building.wallConnect)
+                    {
+                        WallCon wc = (WallCon)t.building;
+                        wc.Update();
+                    }
+                }
+            }
+        }
+
     }
 
     public override void DeleteObject()
