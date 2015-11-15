@@ -80,7 +80,7 @@ public abstract class UnitObj : MonoBehaviour, IPointerClickHandler
             float health = (float)unit.getHealth();
             float maxHealth = (float)unit.getMaxHealth();
 
-            if ((health / maxHealth) * 100 < (unitChars.Count - 1) * (100/numberOfChars))//TODO sort this shit
+            if ((health / maxHealth) * 100 < (unitChars.Count - 1) * (100/numberOfChars))
             {
                  //Debug.Log("Health: " + health + ", MaxHealth " + maxHealth + ", HealthDiv: " + health / maxHealth + "Health pct: " + (health / maxHealth) * 100 + ", comp to" + (unitChars.Count - 1) * 25 + "Where unitcount -1 is" + (unitChars.Count - 1));
                 //choose random dude to destroy
@@ -299,6 +299,14 @@ public abstract class UnitObj : MonoBehaviour, IPointerClickHandler
             running = false;
         }
 
+        int speedCheck = 0;
+        if(halfway)
+        {
+            speedCheck = 1;
+        }
+
+
+        speed *= unit.path[speedCheck].tileType.speedFactor;
 
         this.transform.position = Vector3.MoveTowards(transform.position, moveTarget, (speed/25)*Time.deltaTime);
     }

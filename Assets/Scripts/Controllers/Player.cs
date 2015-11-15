@@ -29,7 +29,7 @@ public class Player {
         //give money for mines
         foreach(Mine m in mines)
         {
-            addMoney(m.value);
+            addMoney(m.getMoney());
         }
 
         //and for keep

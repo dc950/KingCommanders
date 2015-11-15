@@ -84,7 +84,7 @@ public class ArcherObj : UnitObj {
         {
             if(t.unit != null)
             {
-                if(t.unit.owner != ObjectDictionary.getTurnController().getCurrentPlayer())
+                if(t.unit.owner != unit.owner)
                 {
                     target = t.unit;
                     Debug.Log("Enemy detected...");

@@ -54,6 +54,14 @@ Keep (Stone/raidable)
  Barracks (Stone)
  - Can raise 1 troop per turn
 
+ MORAL: 
+ Each Team has a global moral
+ Effects
+ - Damage dealt, unit speed is based off of moral
+ Moral increases by:
+ - Destroying enemies and buildings (various upgrades increase this value)
+ - 
+
 MECHANICS
 
 - Types of buildings only affect damage - all bought by money to keep simple

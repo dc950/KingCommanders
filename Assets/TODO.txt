@@ -8,10 +8,13 @@ Mid Term
 		- Barracks
 		- Gatehouse
 	Placement hologram thing
+	Menus
 
 Long term
 	AI
 	Online
+	Campaign
+	Mobile Version
 
 Improvements
 	improve Overwatch for Archer
@@ -19,4 +22,6 @@ Improvements
 	Store UnitBuildings each player has - remove hacky buildsite build() and hide().   
 	Do something better about destroying walls  
 	Smooth out Camera Controls 
+		- Change move speed relative to zoom level
+		- Make camera zooming and rotating smooth
 	Fighting system

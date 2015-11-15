@@ -162,6 +162,6 @@ public class CatapultChar : UnitChar {
 
     public override void Die()
     {
-        throw new System.NotImplementedException();
+        Destroy(this.gameObject);
     }
 }

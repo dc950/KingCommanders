@@ -723,6 +723,19 @@ MonoBehaviour:
     canWalk: 1
     canBuild: 1
     speedFactor: 1
+    goldFactor: 1
+  - name: Mud
+    visualPrefab: {fileID: 170806, guid: 7c6545aa2651cd846a169367cea8721a, type: 2}
+    canWalk: 1
+    canBuild: 1
+    speedFactor: .5
+    goldFactor: 1
+  - name: Stone
+    visualPrefab: {fileID: 170806, guid: c92927f596e18514baad412c5256eddd, type: 2}
+    canWalk: 1
+    canBuild: 1
+    speedFactor: 1.10000002
+    goldFactor: 3
   mainCamera: {fileID: 1589108539}
   mapSizeX: 18
   mapSizeY: 7
@@ -783,7 +796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTurn: 0
   textTurn: {fileID: 131742992}
-  startingMoney: 100
+  startingMoney: 1000
   btnEndTurn: {fileID: 549183457}
   btnStartAttack: {fileID: 933354873}
   btnBuild: {fileID: 1592984643}

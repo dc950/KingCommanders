@@ -4,15 +4,23 @@ using System.Collections;
 public class Mine : Building {
 
     public int value = 10;
+    bool built = false;
 
     public Mine(Tile tile, Player owner) : base(100, tile, owner)
     {
         owner.mines.Add(this);
         name = "Mine";
+
+        value = (int)(value * tile.tileType.goldFactor);
     }
 
     public int getMoney()
     {
+        if(!built)
+        {
+            built = true;
+            return 0;
+        }
         return value;
     }
 

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
@@ -9,6 +9,7 @@ public class TileType {
 	
 	public bool canWalk = true;
 	public bool canBuild = true;
-	public int speedFactor = 1;
+	public float speedFactor = 1;
+    public float goldFactor = 1;
 	
 }

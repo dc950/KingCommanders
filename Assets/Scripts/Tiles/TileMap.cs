@@ -31,7 +31,17 @@ public class TileMap : MonoBehaviour
         //Place tiles
 		for(int x = 0; x < mapSizeX; x++) {
 			for(int y = 0; y < mapSizeY; y++) {
-				tiles[x,y] = new Tile(x, y, tileTypes[0], this);
+                int index = 0;
+                int genNumber = Random.Range(0,10);
+                if(genNumber == 1)
+                {
+                    index = 1;
+                }
+                if(genNumber == 2)
+                {
+                    index = 2;
+                }
+				tiles[x,y] = new Tile(x, y, tileTypes[index], this);
 			}
 		}
 
